@@ -1,46 +1,54 @@
-import React from 'react';
+import React from "react";
 
 function Team() {
-    return (
-        <div className="container">
-      <div className="row p-5 mt-5 mb-5">
-        <h1 className="fs-2 text-center">People</h1>
+  return (
+    <div className="container">
+      <div className="row p-3 mt-5 border-top">
+        <h1 className="text-center">People</h1>
       </div>
 
-      <div className="row p-5 mt-5 border-top text-muted fs-6" style={{ lineHeight: '1.8', fontSize: '1.2em'}}>
-        <div className="col-6 p-5">
-          <p>
-            We kick-started operations on the 15th of August, 2010 with the goal
-            of oreaking all barriers that traders and investors face in India in
-            terms of cost, support, and tecnology. We named the company Zeradha,
-            a combination of Zero and "Rodhe", the Sanskrit word for barrier.
-          </p>
-          <p>
-            Today, our disruptive pricing models and in-house technology have
-            made us the biggest stock broker in india.
-          </p>
-          <p>
-            {" "}
-            Over 1+ Crare clients place millions of orders every day through our
-            powerful ecosystem of inwestownt platforms, contributing over 15% of
-            all Indian retail trading volumes.
-          </p>
+      <div
+        className="row p-3 mt-5 text-muted"
+        style={{ lineHeight: "1.8", fontSize: "1.2em" }}
+      >
+        <div className="col-6 p-3 text-center">
+          <img
+            src="media/images/nithinKamath.jpg"
+            style={{ borderRadius: "100%", width: "60%" }}
+          />
+          <h4 className="mt-5 text-primary">Nithin Kamath</h4>
+          <h6 className="text-danger">Founder, CEO</h6>
         </div>
-        <div className="col-6 p-5">
+
+        <div className="col-6 p-3">
           <p>
-            In addition, na number of popular open online educational and
-            community initiatives to empower retail and investors.
+            Nithin bootstrapped and founded Zerodha in 2010 to overcome the
+            hundies he faced during his decade long stint as a trades Tocisy,
+            Zerocha has changed the landscape of the Indi industry
           </p>
-            <p>
-            <a href="" style={{ textDecoration: 'none' }}>Rainmatter</a>, our fintech fund and incubator, has invested in several fintech
-            startups with the goal of growing the Indian capital markets</p>
-            <p>And yet, we are always up to something new every day. Catch up on the latest updates on
-            our blog or the media is saying about us
+          <p>
+            He is a member of the SEBI Secondary Market Advisory Committee
+            (SMAC) and the Market Data Advisory Committee (MDAC).
+          </p>
+          <p>Playing basketball is his zen.</p>
+          <p>
+            Connect on{" "}
+            <a href="" style={{ textDecoration: "none" }}>
+              Homepage
+            </a>{" "}
+            /{" "}
+            <a href="" style={{ textDecoration: "none" }}>
+              TradingQnA
+            </a>{" "}
+            /{" "}
+            <a href="" style={{ textDecoration: "none" }}>
+              Twitter
+            </a>
           </p>
         </div>
       </div>
     </div>
-    );
+  );
 }
 
 export default Team;
