@@ -4,7 +4,7 @@ function Team() {
   return (
     <div className="container">
       <div className="row p-3 mt-5 border-top">
-        <h1 className="text-center">People</h1>
+        <h1 className="text-center text-success">People</h1>
       </div>
 
       <div
@@ -16,8 +16,8 @@ function Team() {
             src="media/images/nithinKamath.jpg"
             style={{ borderRadius: "100%", width: "60%" }}
           />
-          <h4 className="mt-5 text-primary">Nithin Kamath</h4>
-          <h6 className="text-danger">Founder, CEO</h6>
+          <h4 className="mt-3 text-danger">Nithin Kamath</h4>
+          <h6 className="text-danger"><i>Founder, CEO</i></h6>
         </div>
 
         <div className="col-6 p-3">
