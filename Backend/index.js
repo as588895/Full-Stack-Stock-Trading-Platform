@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
@@ -14,9 +14,25 @@ const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGODB_URL;
 
 const app = express();
+const cookieParser = require("cookie-parser");
+const authRoutes = require("./auth/routes/authRoutes");
 
-app.use(cors());
-app.use(bodyParser.json());
+// CORS sabse pehle
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+// Body Parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Cookies
+app.use(cookieParser());
+
+// Auth Routes
+app.use("/api/auth", authRoutes);
 
 // app.get("/addHoldings", async (req, res) => {
 //   let tempHoldings = [
