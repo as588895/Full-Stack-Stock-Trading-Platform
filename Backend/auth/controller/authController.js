@@ -150,25 +150,17 @@ exports.login = async (req, res) => {
 
     const token = generateToken(user._id);
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: false, // localhost
+});
 
-    res.json({
-
-      success: true,
-      message: "Login Successful",
-
-      token,
-
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-      },
-
-    });
+res.json({
+    message:"Login Successful",
+    token,
+    user
+});
 
   } catch (err) {
 
@@ -181,6 +173,43 @@ exports.login = async (req, res) => {
 
 
   }
+
+};
+
+exports.getMe = async (req, res) => {
+
+    try {
+
+        const user = await User.findById(req.user.id).select("-password");
+
+        if (!user) {
+
+            return res.status(404).json({
+
+                success:false,
+                message:"User not found"
+
+            });
+
+        }
+
+        res.json({
+
+            success:true,
+            user
+
+        });
+
+    } catch(err){
+
+        res.status(500).json({
+
+            success:false,
+            message:err.message
+
+        });
+
+    }
 
 };
 

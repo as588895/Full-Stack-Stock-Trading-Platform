@@ -17,13 +17,16 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./auth/routes/authRoutes");
 
+const verifyToken = require("./middleware/verifyToken");
+
 // CORS sabse pehle
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+app.use(cors({
+    origin:[
+        "http://localhost:3000",
+        "http://localhost:3001"
+    ],
+    credentials:true
+}));
 // Body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -211,6 +214,20 @@ app.get("/allHoldings", async (req, res) => {
 app.get("/allPositions", async (req, res) => {
   let allPositions = await PositionsModel.find({});
   res.json(allPositions);
+});
+
+// for dashboard
+app.get("/dashboard", verifyToken, (req, res) => {
+
+    res.json({
+
+        success: true,
+        message: "Welcome Dashboard",
+
+        user: req.user,
+
+    });
+
 });
 
 app.post("/newOrder", async (req, res) => {

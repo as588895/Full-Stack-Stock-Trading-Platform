@@ -26,13 +26,26 @@ function Login() {
 
       alert(res.data.message);
 
-      // JWT Token Save
-      localStorage.setItem("token", res.data.token);
+//       // JWT Token Save
+//       localStorage.setItem("token", res.data.token);
 
-      // User Save
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+//       // User Save
+//       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      navigate("/");
+//       // Dashboard open karo
+// navigate("/dashboard");
+// const res = await axios.post(
+//     "http://localhost:3002/api/auth/login",
+//     {
+//         email,
+//         password,
+//     },
+//     {
+//         withCredentials: true,
+//     }
+// );
+
+window.location.href = "http://localhost:3001";
       
     } catch (err) {
       alert(err.response?.data?.message || "Login Failed");
