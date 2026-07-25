@@ -45,7 +45,7 @@ function Login() {
 //     }
 // );
 
-window.location.href = "http://localhost:3001";
+window.location.href = "http://localhost:3000";
       
     } catch (err) {
       alert(err.response?.data?.message || "Login Failed");

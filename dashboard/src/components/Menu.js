@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-const Menu = () => {
+const Menu = ({ user }) => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
@@ -91,9 +91,47 @@ const Menu = () => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
-        </div>
+  <div className="avatar">
+    {user ? user.username.charAt(0).toUpperCase() : "ZU"}
+  </div>
+
+  <p className="username">
+    {user ? user.username : "USERID"}
+  </p>
+
+  {isProfileDropdownOpen && (
+    <div
+      style={{
+        position: "absolute",
+        top: "60px",
+        right: "20px",
+        background: "#fff",
+        border: "1px solid #ddd",
+        borderRadius: "6px",
+        padding: "10px",
+        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+        zIndex: 1000,
+      }}
+    >
+      <p style={{ margin: "0 0 8px 0" }}>
+        <strong>ID:</strong> {user ? user._id : ""}
+      </p>
+
+      <button
+        onClick={() => {
+          window.location.href = "http://localhost:3000";
+        }}
+        style={{
+          width: "100%",
+          padding: "6px",
+          cursor: "pointer",
+        }}
+      >
+        Logout
+      </button>
+    </div>
+  )}
+</div>
       </div>
     </div>
   );
