@@ -21,10 +21,13 @@ const verifyToken = require("./middleware/verifyToken");
 
 // CORS sabse pehle
 app.use(cors({
-    origin:[
-        "http://localhost:3000",
-        "http://localhost:3001"
-    ],
+    // origin:[
+    //     "http://localhost:3000",
+    //     "http://localhost:3001"
+    origin: [
+  "https://your-frontend.onrender.com",
+  "https://your-dashboard.onrender.com",
+],
     credentials:true
 }));
 // Body Parser

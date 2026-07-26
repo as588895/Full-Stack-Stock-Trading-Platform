@@ -10,15 +10,19 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3002/api/auth/me", {
-        withCredentials: true,
+      // .get("http://localhost:3002/api/auth/me", {
+      //   withCredentials: true,
+      get("https://your-backend.onrender.com/api/auth/me", {
+      withCredentials: true,
+
       })
       .then((res) => {
         setUser(res.data.user);
         setLoading(false);
       })
       .catch(() => {
-        window.location.replace("http://localhost:3001/login");
+        // window.location.replace("http://localhost:3001/login");
+        window.location.replace("https://your-frontend.onrender.com/login");
       });
   }, []);
 

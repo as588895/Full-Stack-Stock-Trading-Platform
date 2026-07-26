@@ -120,15 +120,18 @@ const Menu = ({ user }) => {
      <button
   onClick={async () => {
     try {
+      // await axios.post(
+      //   "http://localhost:3002/api/auth/logout",
       await axios.post(
-        "http://localhost:3002/api/auth/logout",
+  "https://your-backend.onrender.com/api/auth/logout",
         {},
         {
           withCredentials: true,
         }
       );
 
-      window.location.href = "http://localhost:3000";
+      // window.location.href = "http://localhost:3000";
+      window.location.href = "https://your-frontend.onrender.com";
     } catch (err) {
       console.log(err);
     }

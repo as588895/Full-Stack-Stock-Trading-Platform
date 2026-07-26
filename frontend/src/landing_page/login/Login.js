@@ -14,7 +14,8 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3002/api/auth/login",
+        // "http://localhost:3002/api/auth/login",
+        "https://your-backend.onrender.com/api/auth/login",
         {
           email,
           password,
@@ -45,7 +46,8 @@ function Login() {
 //     }
 // );
 
-window.location.href = "http://localhost:3001";
+// window.location.href = "http://localhost:3001";
+window.location.href = "https://your-dashboard.onrender.com";
       
     } catch (err) {
       alert(err.response?.data?.message || "Login Failed");
