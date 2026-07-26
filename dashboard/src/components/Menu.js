@@ -123,7 +123,7 @@ const Menu = ({ user }) => {
       // await axios.post(
       //   "http://localhost:3002/api/auth/logout",
       await axios.post(
-  "https://your-backend.onrender.com/api/auth/logout",
+  "https://full-stack-stock-trading-platform-c4js.onrender.com/api/auth/logout",
         {},
         {
           withCredentials: true,
@@ -131,7 +131,7 @@ const Menu = ({ user }) => {
       );
 
       // window.location.href = "http://localhost:3000";
-      window.location.href = "https://your-frontend.onrender.com";
+      window.location.href = "https://full-stack-stock-trading-platform-2-rouf.onrender.com";
     } catch (err) {
       console.log(err);
     }

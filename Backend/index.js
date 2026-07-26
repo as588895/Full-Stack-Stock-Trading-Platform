@@ -25,8 +25,8 @@ app.use(cors({
     //     "http://localhost:3000",
     //     "http://localhost:3001"
     origin: [
-  "https://your-frontend.onrender.com",
-  "https://your-dashboard.onrender.com",
+  "https://full-stack-stock-trading-platform-2-rouf.onrender.com",
+  "https://full-stack-stock-trading-platform-1-18oq.onrender.com",
 ],
     credentials:true
 }));

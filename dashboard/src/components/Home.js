@@ -12,7 +12,7 @@ const Home = () => {
     axios
       // .get("http://localhost:3002/api/auth/me", {
       //   withCredentials: true,
-      .get("https://your-backend.onrender.com/api/auth/me", {
+      .get("https://full-stack-stock-trading-platform-c4js.onrender.com/api/auth/me", {
       withCredentials: true,
 
       })
@@ -22,7 +22,7 @@ const Home = () => {
       })
       .catch(() => {
         // window.location.replace("http://localhost:3001/login");
-        window.location.replace("https://your-frontend.onrender.com/login");
+        window.location.replace("https://full-stack-stock-trading-platform-1-18oq.onrender.com/login");
       });
   }, []);
 

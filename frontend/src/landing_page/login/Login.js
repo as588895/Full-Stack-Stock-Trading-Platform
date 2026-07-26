@@ -15,7 +15,7 @@ function Login() {
     try {
       const res = await axios.post(
         // "http://localhost:3002/api/auth/login",
-        "https://your-backend.onrender.com/api/auth/login",
+        "https://full-stack-stock-trading-platform-c4js.onrender.com/api/auth/login",
         {
           email,
           password,
@@ -47,7 +47,7 @@ function Login() {
 // );
 
 // window.location.href = "http://localhost:3001";
-window.location.href = "https://your-dashboard.onrender.com";
+window.location.href = "https://full-stack-stock-trading-platform-1-18oq.onrender.com";
       
     } catch (err) {
       alert(err.response?.data?.message || "Login Failed");
