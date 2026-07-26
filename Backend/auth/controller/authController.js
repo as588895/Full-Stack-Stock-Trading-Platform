@@ -219,18 +219,11 @@ exports.getMe = async (req, res) => {
 
 exports.logout = (req, res) => {
 
-  res.cookie("token", "", {
+    res.clearCookie("token");
 
-    httpOnly: true,
-    expires: new Date(0),
-
-  });
-
-  res.json({
-
-    success: true,
-    message: "Logged Out Successfully",
-
-  });
+    res.status(200).json({
+        success: true,
+        message: "Logged Out Successfully",
+    });
 
 };

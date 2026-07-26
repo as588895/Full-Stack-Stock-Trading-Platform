@@ -1,10 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +24,7 @@ function Login() {
         },
       );
 
-      alert(res.data.message);
+      // alert(res.data.message);
 
 //       // JWT Token Save
 //       localStorage.setItem("token", res.data.token);
@@ -45,7 +45,7 @@ function Login() {
 //     }
 // );
 
-window.location.href = "http://localhost:3000";
+window.location.href = "http://localhost:3001";
       
     } catch (err) {
       alert(err.response?.data?.message || "Login Failed");

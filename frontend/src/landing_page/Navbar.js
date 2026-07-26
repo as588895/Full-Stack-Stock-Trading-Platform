@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -14,11 +15,24 @@ function Navbar() {
     }
   }, []);
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/login");
-    window.location.reload();
-  };
+  const handleLogout = async () => {
+  try {
+    await axios.post(
+      "http://localhost:3002/api/auth/logout",
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+
+    window.location.href = "http://localhost:3000";
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   return (
     <nav

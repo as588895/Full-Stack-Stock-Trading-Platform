@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Menu = ({ user }) => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -19,7 +19,7 @@ const Menu = ({ user }) => {
 
   return (
     <div className="menu-container">
-      <img src="logo.png" style={{ width: "50px" }} />
+      <img src="logo.png" alt="Logo" style={{ width: "50px" }} />
       <div className="menus">
         <ul>
           <li>
@@ -117,18 +117,25 @@ const Menu = ({ user }) => {
         <strong>ID:</strong> {user ? user._id : ""}
       </p>
 
-      <button
-        onClick={() => {
-          window.location.href = "http://localhost:3000";
-        }}
-        style={{
-          width: "100%",
-          padding: "6px",
-          cursor: "pointer",
-        }}
-      >
-        Logout
-      </button>
+     <button
+  onClick={async () => {
+    try {
+      await axios.post(
+        "http://localhost:3002/api/auth/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+
+      window.location.href = "http://localhost:3000";
+    } catch (err) {
+      console.log(err);
+    }
+  }}
+>
+  Logout
+</button>
     </div>
   )}
 </div>
