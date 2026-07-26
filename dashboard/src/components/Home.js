@@ -12,7 +12,7 @@ const Home = () => {
     axios
       // .get("http://localhost:3002/api/auth/me", {
       //   withCredentials: true,
-      get("https://your-backend.onrender.com/api/auth/me", {
+      .get("https://your-backend.onrender.com/api/auth/me", {
       withCredentials: true,
 
       })
