@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import API from "../../services/authApi";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Signup() {
   const navigate = useNavigate();
@@ -26,17 +27,23 @@ function Signup() {
     try {
       setLoading(true);
 
-      const res = await API.post("/signup", formData);
+      // const res = await API.post("/signup", formData);
+      // // alert(res.data.message);
+      // navigate("/login");
+      await API.post("/signup", formData);
 
-      alert(res.data.message);
+toast.success("✅ Account created successfully!");
 
-      navigate("/login");
+setTimeout(() => {
+  navigate("/login");
+}, 1200);
     } 
     catch (err) {
       console.log(err);
       console.log(err.response);
       console.log(err.response?.data);
-      alert(err.response?.data?.message || err.message || "Signup Failed");
+      // alert(err.response?.data?.message || err.message || "Signup Failed");
+      toast.error(err.response?.data?.message || "Signup Failed");
     } 
     finally {
       setLoading(false);

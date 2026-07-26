@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./Login.css";
 // import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
   // const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
+      await axios.post(
         // "http://localhost:3002/api/auth/login",
         "https://full-stack-stock-trading-platform-c4js.onrender.com/api/auth/login",
         {
@@ -26,6 +27,13 @@ function Login() {
       );
 
       // alert(res.data.message);
+      // alert(res.data.message);
+
+toast.success("✅ Login successful!");
+
+setTimeout(() => {
+  window.location.href = "https://YOUR-DASHBOARD.onrender.com";
+}, 1200);
 
 //       // JWT Token Save
 //       localStorage.setItem("token", res.data.token);
@@ -50,7 +58,8 @@ function Login() {
 window.location.href = "https://full-stack-stock-trading-platform-1-18oq.onrender.com";
       
     } catch (err) {
-      alert(err.response?.data?.message || "Login Failed");
+      // alert(err.response?.data?.message || "Login Failed");
+      toast.error(err.response?.data?.message || "Login Failed");
     }
   };
 

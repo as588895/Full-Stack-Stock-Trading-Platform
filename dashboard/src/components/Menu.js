@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+// import { toast } from "react-toastify";
 
 const Menu = ({ user }) => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -91,57 +92,58 @@ const Menu = ({ user }) => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-  <div className="avatar">
-    {user ? user.username.charAt(0).toUpperCase() : "ZU"}
-  </div>
+          <div className="avatar">
+            {user ? user.username.charAt(0).toUpperCase() : "ZU"}
+          </div>
 
-  <p className="username">
-    {user ? user.username : "USERID"}
-  </p>
+          <p className="username">{user ? user.username : "USERID"}</p>
 
-  {isProfileDropdownOpen && (
-    <div
-      style={{
-        position: "absolute",
-        top: "60px",
-        right: "20px",
-        background: "#fff",
-        border: "1px solid #ddd",
-        borderRadius: "6px",
-        padding: "10px",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
-        zIndex: 1000,
-      }}
-    >
-      <p style={{ margin: "0 0 8px 0" }}>
-        <strong>ID:</strong> {user ? user._id : ""}
-      </p>
+          {isProfileDropdownOpen && (
+            <div
+              style={{
+                position: "absolute",
+                top: "60px",
+                right: "20px",
+                background: "#fff",
+                border: "1px solid #ddd",
+                borderRadius: "6px",
+                padding: "10px",
+                boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+                zIndex: 1000,
+              }}
+            >
+              <p style={{ margin: "0 0 8px 0" }}>
+                <strong>ID:</strong> {user ? user._id : ""}
+              </p>
 
-     <button
-  onClick={async () => {
-    try {
-      // await axios.post(
-      //   "http://localhost:3002/api/auth/logout",
-      await axios.post(
-  "https://full-stack-stock-trading-platform-c4js.onrender.com/api/auth/logout",
-        {},
-        {
-          withCredentials: true,
-        }
-      );
+              <button
+                onClick={async () => {
+                  try {
+                    // await axios.post(
+                    //   "http://localhost:3002/api/auth/logout",
+                    await axios.post(
+                      "https://full-stack-stock-trading-platform-c4js.onrender.com/api/auth/logout",
+                      {},
+                      {
+                        withCredentials: true,
+                      },
+                    );
 
-      // window.location.href = "http://localhost:3000";
-      window.location.href = "https://full-stack-stock-trading-platform-2-rouf.onrender.com";
-    } catch (err) {
-      console.log(err);
-    }
-  }}
->
-  Logout
-</button>
-    </div>
-  )}
-</div>
+                    // toast.success("✅ Logout successful!");
+                    // window.location.href = "http://localhost:3000";
+                    
+                    window.location.href =
+                      "https://full-stack-stock-trading-platform-2-rouf.onrender.com/?logout=true";
+                  } catch (err) {
+                    console.log(err);
+                  }
+                }}
+              >
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

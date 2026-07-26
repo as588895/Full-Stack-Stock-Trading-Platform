@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Home from "./components/Home";
 // import ProtectedRoute from "./components/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,6 +17,10 @@ root.render(
               <Home />
             </ProtectedRoute>} /> */}
       </Routes>
+      <ToastContainer
+  position="top-right"
+  autoClose={2500}
+/>
     </BrowserRouter>
   </React.StrictMode>
 );
