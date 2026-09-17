@@ -1,0 +1,652 @@
+/* ================================
+   ORDERS PAGE
+================================ */
+
+/* ================================
+   ORDERS PAGE
+================================ */
+
+.orders {
+  width: 100%;
+  min-height: 100vh;
+  padding: 35px;
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(56, 126, 209, 0.12),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #edf3f8,
+      #f4f6f8
+    );
+}
+
+
+/* ================================
+   TABLE CARD
+================================ */
+
+.orders-table-container {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+
+  border: 1px solid rgba(99, 125, 255, 0.15);
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 30px rgba(60, 90, 150, 0.10),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* ================================
+   HEADING
+================================ */
+
+.orders h2 {
+  margin: 0;
+  padding: 25px 25px 20px;
+
+  font-size: 25px;
+  font-weight: 700;
+
+  background: linear-gradient(
+    90deg,
+    #387ed1,
+    #635bff
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* ================================
+   TABLE
+================================ */
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  font-size: 14px;
+}
+
+
+/* ================================
+   TABLE HEADER
+================================ */
+
+.orders-table thead {
+  background: linear-gradient(
+    90deg,
+    #edf4ff,
+    #f3f0ff
+  );
+}
+
+.orders-table th {
+  padding: 17px 20px;
+
+  text-align: left;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  color: #4b5563;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+
+/* ================================
+   TABLE BODY
+================================ */
+
+.orders-table td {
+  padding: 17px 20px;
+
+  color: #374151;
+
+  border-bottom: 1px solid #edf0f5;
+
+  transition: all 0.2s ease;
+}
+
+
+/* ================================
+   ROW HOVER
+================================ */
+
+.orders-table tbody tr {
+  transition: all 0.25s ease;
+}
+
+.orders-table tbody tr:hover {
+  background: linear-gradient(
+    90deg,
+    #f6faff,
+    #faf8ff
+  );
+
+  transform: scale(1.002);
+}
+
+
+/* ================================
+   STOCK NAME
+================================ */
+
+.orders-table td:first-child {
+  font-size: 15px;
+  font-weight: 700;
+
+  color: #387ed1;
+}
+
+
+/* ================================
+   QUANTITY
+================================ */
+
+.orders-table td:nth-child(2) {
+  font-weight: 600;
+  color: #374151;
+}
+
+
+/* ================================
+   PRICE
+================================ */
+
+.orders-table td:nth-child(3) {
+  font-weight: 600;
+  color: #111827;
+}
+
+
+/* ================================
+   BUY BADGE
+================================ */
+
+.order-buy {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 55px;
+
+  padding: 6px 13px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    135deg,
+    #dcfce7,
+    #bbf7d0
+  );
+
+  color: #15803d;
+
+  border: 1px solid #86efac;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  box-shadow: 0 3px 8px rgba(34, 197, 94, 0.12);
+}
+
+
+/* ================================
+   SELL BADGE
+================================ */
+
+.order-sell {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 55px;
+
+  padding: 6px 13px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    135deg,
+    #fee2e2,
+    #fecaca
+  );
+
+  color: #dc2626;
+
+  border: 1px solid #fca5a5;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  box-shadow: 0 3px 8px rgba(239, 68, 68, 0.12);
+}
+
+
+/* ================================
+   DATE
+================================ */
+
+.orders-table td:last-child {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+
+/* ================================
+   LAST ROW
+================================ */
+
+.orders-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* ================================
+   LOADING
+================================ */
+
+.orders > p {
+  padding: 30px;
+
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+
+/* ================================
+   NO ORDERS
+================================ */
+
+.no-orders {
+  width: 100%;
+  min-height: 55vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background: linear-gradient(
+    135deg,
+    #f0f7ff,
+    #f8f3ff
+  );
+
+  border-radius: 18px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow: 0 10px 30px rgba(60, 90, 150, 0.08);
+}
+
+
+.no-orders p {
+  margin-bottom: 20px;
+
+  color: #64748b;
+
+  font-size: 17px;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+  .orders {
+    padding: 20px 15px;
+  }
+
+  .orders-table-container {
+    overflow-x: auto;
+  }
+
+  .orders-table {
+    min-width: 700px;
+  }
+
+  .orders h2 {
+    font-size: 21px;
+    padding: 20px;
+  }
+
+}
+
+
+/* ================================
+   TABLE CARD
+================================ */
+
+.orders-table-container {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+
+  border: 1px solid rgba(99, 125, 255, 0.15);
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 30px rgba(60, 90, 150, 0.10),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+
+  backdrop-filter: blur(10px);
+}
+
+
+/* ================================
+   HEADING
+================================ */
+
+.orders h2 {
+  margin: 0;
+  padding: 25px 25px 20px;
+
+  font-size: 25px;
+  font-weight: 700;
+
+  background: linear-gradient(
+    90deg,
+    #387ed1,
+    #635bff
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* ================================
+   TABLE
+================================ */
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  font-size: 14px;
+}
+
+
+/* ================================
+   TABLE HEADER
+================================ */
+
+.orders-table thead {
+  background: linear-gradient(
+    90deg,
+    #edf4ff,
+    #f3f0ff
+  );
+}
+
+.orders-table th {
+  padding: 17px 20px;
+
+  text-align: left;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  color: #4b5563;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+
+/* ================================
+   TABLE BODY
+================================ */
+
+.orders-table td {
+  padding: 17px 20px;
+
+  color: #374151;
+
+  border-bottom: 1px solid #edf0f5;
+
+  transition: all 0.2s ease;
+}
+
+
+/* ================================
+   ROW HOVER
+================================ */
+
+.orders-table tbody tr {
+  transition: all 0.25s ease;
+}
+
+.orders-table tbody tr:hover {
+  background: linear-gradient(
+    90deg,
+    #f6faff,
+    #faf8ff
+  );
+
+  transform: scale(1.002);
+}
+
+
+/* ================================
+   STOCK NAME
+================================ */
+
+.orders-table td:first-child {
+  font-size: 15px;
+  font-weight: 700;
+
+  color: #387ed1;
+}
+
+
+/* ================================
+   QUANTITY
+================================ */
+
+.orders-table td:nth-child(2) {
+  font-weight: 600;
+  color: #374151;
+}
+
+
+/* ================================
+   PRICE
+================================ */
+
+.orders-table td:nth-child(3) {
+  font-weight: 600;
+  color: #111827;
+}
+
+
+/* ================================
+   BUY BADGE
+================================ */
+
+.order-buy {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 55px;
+
+  padding: 6px 13px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    135deg,
+    #dcfce7,
+    #bbf7d0
+  );
+
+  color: #15803d;
+
+  border: 1px solid #86efac;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  box-shadow: 0 3px 8px rgba(34, 197, 94, 0.12);
+}
+
+
+/* ================================
+   SELL BADGE
+================================ */
+
+.order-sell {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 55px;
+
+  padding: 6px 13px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(
+    135deg,
+    #fee2e2,
+    #fecaca
+  );
+
+  color: #dc2626;
+
+  border: 1px solid #fca5a5;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  box-shadow: 0 3px 8px rgba(239, 68, 68, 0.12);
+}
+
+
+/* ================================
+   DATE
+================================ */
+
+.orders-table td:last-child {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+
+/* ================================
+   LAST ROW
+================================ */
+
+.orders-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* ================================
+   LOADING
+================================ */
+
+.orders > p {
+  padding: 30px;
+
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+
+/* ================================
+   NO ORDERS
+================================ */
+
+.no-orders {
+  width: 100%;
+  min-height: 55vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background: linear-gradient(
+    135deg,
+    #f0f7ff,
+    #f8f3ff
+  );
+
+  border-radius: 18px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow: 0 10px 30px rgba(60, 90, 150, 0.08);
+}
+
+
+.no-orders p {
+  margin-bottom: 20px;
+
+  color: #64748b;
+
+  font-size: 17px;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+  .orders {
+    padding: 20px 15px;
+  }
+
+  .orders-table-container {
+    overflow-x: auto;
+  }
+
+  .orders-table {
+    min-width: 700px;
+  }
+
+  .orders h2 {
+    font-size: 21px;
+    padding: 20px;
+  }
+
+}

@@ -1,9 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 import GeneralContext from "./GeneralContext";
-
 import "./BuyActionWindow.css";
 
 const SellActionWindow = ({ uid }) => {
@@ -12,7 +10,15 @@ const SellActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState("");
 
-  const handleSellClick = async () => {
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [walletBalance, setWalletBalance] = useState(0);
+
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSellClick = async (e) => {
+    e.preventDefault();
+
     const isLocalhost = window.location.hostname === "localhost";
 
     const backendURL = isLocalhost
@@ -26,7 +32,6 @@ const SellActionWindow = ({ uid }) => {
       mode: "SELL",
     };
 
-    // Check exactly what frontend is sending
     console.log("SELL ORDER DATA:", orderData);
 
     try {
@@ -40,24 +45,33 @@ const SellActionWindow = ({ uid }) => {
 
       console.log("SELL ORDER RESPONSE:", response.data);
 
-      alert(
-        `SELL order successful!\nRemaining Balance: ₹${response.data.walletBalance}`
-      );
-
-      closeSellWindow();
+      setWalletBalance(response.data.walletBalance);
+      setShowSuccess(true);
     } catch (err) {
       console.error("SELL ORDER ERROR:", err);
       console.error("SERVER RESPONSE:", err.response?.data);
 
-      alert(
+      setErrorMessage(
         err.response?.data?.message ||
           "Unable to place sell order"
       );
+
+      setShowError(true);
     }
   };
 
-  const handleCancelClick = () => {
+  const handleCancelClick = (e) => {
+    e.preventDefault();
     closeSellWindow();
+  };
+
+  const handleSuccessClose = () => {
+    setShowSuccess(false);
+    closeSellWindow();
+  };
+
+  const handleErrorClose = () => {
+    setShowError(false);
   };
 
   return (
@@ -66,6 +80,9 @@ const SellActionWindow = ({ uid }) => {
       id="buy-window"
       draggable="true"
     >
+
+      {/* SELL WINDOW */}
+
       <div className="regular-order">
         <div className="inputs">
 
@@ -116,7 +133,8 @@ const SellActionWindow = ({ uid }) => {
         <div>
 
           <Link
-            className="btn btn-blue"
+            to=""
+            className="btn btn-sell"
             onClick={handleSellClick}
           >
             Sell
@@ -131,7 +149,88 @@ const SellActionWindow = ({ uid }) => {
           </Link>
 
         </div>
+
       </div>
+
+      {/* SUCCESS POPUP */}
+
+      {showSuccess && (
+        <div className="buy-popup-overlay">
+
+          <div className="buy-popup">
+
+            <button
+              className="buy-popup-close"
+              onClick={handleSuccessClose}
+            >
+              ×
+            </button>
+
+            <div className="success-icon">
+              ✓
+            </div>
+
+            <h2>Order Successful!</h2>
+
+            <p className="popup-main-text">
+              SELL order successful!
+            </p>
+
+            <p className="popup-balance">
+              Remaining Balance:
+              <strong>
+                ₹{Number(walletBalance).toFixed(2)}
+              </strong>
+            </p>
+
+            <button
+              className="popup-ok-btn"
+              onClick={handleSuccessClose}
+            >
+              OK
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
+      {/* ERROR POPUP */}
+
+      {showError && (
+        <div className="buy-popup-overlay">
+
+          <div className="buy-popup">
+
+            <button
+              className="buy-popup-close"
+              onClick={handleErrorClose}
+            >
+              ×
+            </button>
+
+            <div className="error-icon">
+              !
+            </div>
+
+            <h2>Order Failed</h2>
+
+            <p className="popup-main-text">
+              {errorMessage}
+            </p>
+
+            <button
+              className="popup-ok-btn"
+              onClick={handleErrorClose}
+            >
+              OK
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
     </div>
   );
 };

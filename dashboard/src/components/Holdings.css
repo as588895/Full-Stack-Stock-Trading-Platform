@@ -1,0 +1,371 @@
+/* ========================================
+   HOLDINGS SECTION
+======================================== */
+
+.title {
+  margin: 0 0 22px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #424242;
+}
+
+
+/* ========================================
+   HOLDINGS TABLE CONTAINER
+======================================== */
+
+.order-table {
+  width: 100%;
+  overflow-x: auto;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f8fbff
+  );
+
+  border: 1px solid #e1e8f0;
+  border-radius: 14px;
+
+  box-shadow:
+    0 8px 25px rgba(56, 126, 209, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+
+  margin-bottom: 28px;
+}
+
+
+/* ========================================
+   TABLE
+======================================== */
+
+.order-table table {
+  width: 100%;
+  border-collapse: collapse;
+
+  font-size: 14px;
+}
+
+
+/* ========================================
+   TABLE HEADER
+======================================== */
+
+.order-table thead {
+  background: linear-gradient(
+    90deg,
+    #edf5ff,
+    #f5f2ff
+  );
+}
+
+.order-table th {
+  padding: 17px 16px;
+
+  text-align: right;
+
+  color: #64748b;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.order-table th:first-child {
+  text-align: left;
+}
+
+
+/* ========================================
+   TABLE BODY
+======================================== */
+
+.order-table td {
+  padding: 17px 16px;
+
+  text-align: right;
+
+  color: #374151;
+
+  font-weight: 500;
+
+  border-bottom: 1px solid #edf1f5;
+
+  white-space: nowrap;
+
+  transition: all 0.2s ease;
+}
+
+.order-table td:first-child {
+  text-align: left;
+}
+
+
+/* ========================================
+   ROW HOVER
+======================================== */
+
+.order-table tbody tr {
+  transition: all 0.25s ease;
+}
+
+.order-table tbody tr:hover {
+  background: linear-gradient(
+    90deg,
+    #f7fbff,
+    #faf8ff
+  );
+
+  box-shadow: inset 4px 0 0 #387ed1;
+}
+
+
+/* ========================================
+   STOCK NAME
+======================================== */
+
+.order-table td:first-child {
+  color: #387ed1;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+
+/* ========================================
+   QUANTITY
+======================================== */
+
+.order-table td:nth-child(2) {
+  color: #374151;
+  font-weight: 600;
+}
+
+
+/* ========================================
+   PRICE VALUES
+======================================== */
+
+.order-table td:nth-child(3),
+.order-table td:nth-child(4),
+.order-table td:nth-child(5) {
+  font-weight: 600;
+  color: #111827;
+}
+
+
+/* ========================================
+   PROFIT
+======================================== */
+
+.order-table .profit {
+  color: #159447;
+
+  font-weight: 700;
+}
+
+
+/* ========================================
+   LOSS
+======================================== */
+
+.order-table .loss {
+  color: #e04b4b;
+
+  font-weight: 700;
+}
+
+
+/* ========================================
+   LAST ROW
+======================================== */
+
+.order-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* ========================================
+   SUMMARY CARDS
+======================================== */
+
+.row {
+  display: flex;
+
+  gap: 18px;
+
+  width: 100%;
+
+  margin: 10px 0 30px;
+}
+
+
+/* ========================================
+   INDIVIDUAL CARD
+======================================== */
+
+.row .col {
+  flex: 1;
+
+  position: relative;
+
+  padding: 22px 24px;
+
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f7faff
+  );
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 7px 20px rgba(56, 126, 209, 0.08);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* ========================================
+   CARD HOVER
+======================================== */
+
+.row .col:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 12px 28px rgba(56, 126, 209, 0.15);
+}
+
+
+/* ========================================
+   CARD TOP ACCENT
+======================================== */
+
+.row .col::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 5px;
+  height: 100%;
+
+  background: linear-gradient(
+    180deg,
+    #387ed1,
+    #635bff
+  );
+
+  border-radius: 14px 0 0 14px;
+}
+
+
+/* ========================================
+   CARD VALUE
+======================================== */
+
+.row .col h5 {
+  margin: 0 0 8px;
+
+  font-size: 21px;
+
+  font-weight: 700;
+
+  color: #1f2937;
+}
+
+
+/* Decimal Part */
+
+.row .col h5 span {
+  font-size: 15px;
+
+  color: #64748b;
+}
+
+
+/* ========================================
+   CARD LABEL
+======================================== */
+
+.row .col p {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 500;
+}
+
+
+/* ========================================
+   P&L CARD
+======================================== */
+
+.row .col:last-child h5 {
+  color: #159447;
+}
+
+
+/* ========================================
+   GRAPH SPACE
+======================================== */
+
+.row + div {
+  margin-top: 10px;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .row .col {
+    min-width: 220px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .title {
+    font-size: 20px;
+  }
+
+  .order-table {
+    border-radius: 10px;
+  }
+
+  .order-table table {
+    min-width: 850px;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .row .col {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+}

@@ -1,0 +1,392 @@
+/* ========================================= */
+/* WATCHLIST PAGE */
+/* ========================================= */
+
+.watchlist-page {
+  width: 100%;
+
+  min-height: calc(100vh - 70px);
+
+  padding: 32px;
+
+  box-sizing: border-box;
+
+  background: #f6f8fb;
+}
+
+
+/* ========================================= */
+/* HEADER */
+/* ========================================= */
+
+.watchlist-page-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+
+.watchlist-page-header h2 {
+  margin: 0;
+
+  font-size: 28px;
+
+  color: #222;
+}
+
+
+.watchlist-page-header p {
+  margin: 6px 0 0;
+
+  color: #7b8190;
+
+  font-size: 14px;
+}
+
+
+.watchlist-count {
+  background: #eaf2ff;
+
+  color: #387ed1;
+
+  padding: 8px 14px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+/* ========================================= */
+/* SEARCH */
+/* ========================================= */
+
+.watchlist-search {
+  margin-bottom: 22px;
+}
+
+
+.watchlist-search input {
+  width: 100%;
+
+  max-width: 700px;
+
+  height: 45px;
+
+  border: 1px solid #dfe3e8;
+
+  border-radius: 8px;
+
+  padding: 0 16px;
+
+  font-size: 14px;
+
+  outline: none;
+
+  background: white;
+
+  box-sizing: border-box;
+}
+
+
+.watchlist-search input:focus {
+  border-color: #387ed1;
+}
+
+
+/* ========================================= */
+/* STOCK LIST */
+/* ========================================= */
+
+.watchlist-stock-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  max-width: 950px;
+}
+
+
+/* ========================================= */
+/* STOCK CARD */
+/* ========================================= */
+
+.watchlist-stock-card {
+  background: white;
+
+  border: 1px solid #e6e9ed;
+
+  border-radius: 12px;
+
+  padding: 17px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.04);
+
+  transition: 0.2s ease;
+}
+
+
+.watchlist-stock-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.07);
+}
+
+
+/* ========================================= */
+/* STOCK INFO */
+/* ========================================= */
+
+.watchlist-stock-info {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  flex: 1;
+}
+
+
+.stock-name-section {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+
+.stock-name-section p {
+  margin: 0;
+
+  font-size: 16px;
+
+  font-weight: 600;
+}
+
+
+.stock-percent {
+  font-size: 13px;
+
+  color: #777;
+}
+
+
+.stock-price-section {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+
+.stock-price {
+  font-size: 15px;
+
+  font-weight: 600;
+
+  color: #333;
+}
+
+
+/* ========================================= */
+/* PROFIT / LOSS */
+/* ========================================= */
+
+.up {
+  color: #20a464 !important;
+}
+
+
+.down {
+  color: #df514c !important;
+}
+
+
+/* ========================================= */
+/* PERMANENT ACTIONS */
+/* ========================================= */
+
+.watchlist-permanent-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+/* ========================================= */
+/* BUY */
+/* ========================================= */
+
+.watchlist-buy-btn {
+  border: none;
+
+  background: #e8f7ef;
+
+  color: #159957;
+
+  padding: 8px 18px;
+
+  border-radius: 6px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.watchlist-buy-btn:hover {
+  background: #159957;
+
+  color: white;
+}
+
+
+/* ========================================= */
+/* SELL */
+/* ========================================= */
+
+.watchlist-sell-btn {
+  border: none;
+
+  background: #fdeceb;
+
+  color: #df514c;
+
+  padding: 8px 18px;
+
+  border-radius: 6px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.watchlist-sell-btn:hover {
+  background: #df514c;
+
+  color: white;
+}
+
+
+/* ========================================= */
+/* ICON BUTTONS */
+/* ========================================= */
+
+.watchlist-icon-btn {
+  width: 36px;
+
+  height: 36px;
+
+  border: 1px solid #e1e4e8;
+
+  background: white;
+
+  color: #555;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.watchlist-icon-btn:hover {
+  background: #f3f5f7;
+}
+
+
+/* ========================================= */
+/* CHART */
+/* ========================================= */
+
+.watchlist-chart {
+  margin-top: 30px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 25px;
+
+  max-width: 950px;
+
+  border: 1px solid #e6e9ed;
+}
+
+
+.watchlist-chart h3 {
+  margin-top: 0;
+
+  margin-bottom: 20px;
+
+  color: #333;
+}
+
+
+/* ========================================= */
+/* MOBILE */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  .watchlist-page {
+    padding: 20px;
+  }
+
+
+  .watchlist-stock-card {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .watchlist-stock-info {
+    width: 100%;
+  }
+
+
+  .watchlist-permanent-actions {
+    width: 100%;
+  }
+
+
+  .watchlist-buy-btn,
+  .watchlist-sell-btn {
+    flex: 1;
+  }
+
+}

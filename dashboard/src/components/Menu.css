@@ -1,0 +1,276 @@
+/* ========================================= */
+/* SIDEBAR */
+/* ========================================= */
+
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 230px;
+  height: 100vh;
+
+  background: #ffffff;
+
+  border-right: 1px solid #e5e7eb;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  z-index: 1000;
+}
+
+
+/* ========================================= */
+/* LOGO */
+/* ========================================= */
+
+.sidebar-logo {
+  height: 85px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-logo img {
+  width: 48px;
+  height: auto;
+  object-fit: contain;
+}
+
+
+/* ========================================= */
+/* MENUS */
+/* ========================================= */
+
+.menus {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0 15px 18px;
+
+  box-sizing: border-box;
+
+  overflow-y: auto;
+}
+
+
+/* ========================================= */
+/* MENU LIST */
+/* ========================================= */
+
+.menus ul {
+  list-style: none;
+
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+
+/* ========================================= */
+/* MENU ITEM */
+/* ========================================= */
+
+.menu {
+  margin: 4px 0;
+
+  padding: 11px 15px;
+
+  border-radius: 7px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #555b66;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+
+.menu:hover {
+  background: #f3f6fa;
+  color: #387ed1;
+}
+
+
+/* ACTIVE MENU */
+
+.menu.selected {
+  background: #eaf2ff;
+
+  color: #387ed1;
+
+  font-weight: 600;
+}
+
+
+/* ========================================= */
+/* BOTTOM LINKS */
+/* ========================================= */
+
+.menu-bottom-links {
+  margin-top: auto;
+
+  padding-top: 10px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+
+.menu-bottom-links .menu {
+  margin: 3px 0;
+}
+
+
+/* ========================================= */
+/* USER SECTION */
+/* ========================================= */
+
+.sidebar-user-section {
+  margin-top: 10px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+
+/* USER */
+
+.sidebar-user {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 5px 5px 10px;
+}
+
+
+/* AVATAR */
+
+.sidebar-avatar {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #387ed1;
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+
+/* USER INFO */
+
+.sidebar-user-info {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+
+.sidebar-user-label {
+  font-size: 10px;
+
+  color: #9298a1;
+
+  margin-bottom: 2px;
+}
+
+
+.sidebar-username {
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #222;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* ========================================= */
+/* LOGOUT */
+/* ========================================= */
+
+.sidebar-logout {
+  width: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 9px 8px;
+
+  border-radius: 7px;
+
+  color: #df514c;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition: all 0.2s ease;
+}
+
+
+.sidebar-logout:hover {
+  background: #fff1f0;
+}
+
+
+.logout-icon {
+  font-size: 18px;
+}
+
+
+/* ========================================= */
+/* SCROLLBAR */
+/* ========================================= */
+
+.menus::-webkit-scrollbar {
+  width: 4px;
+}
+
+
+.menus::-webkit-scrollbar-thumb {
+  background: #d5d9de;
+
+  border-radius: 10px;
+}

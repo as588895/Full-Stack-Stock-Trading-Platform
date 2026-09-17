@@ -1,0 +1,505 @@
+/* ================================
+   SELL ORDER WINDOW
+================================ */
+
+.sell-window {
+  width: 420px;
+  max-width: 92%;
+  min-height: 300px;
+
+  background: #ffffff;
+
+  position: fixed;
+
+  bottom: 30px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 1000;
+
+  border-radius: 12px;
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.18),
+    0 5px 15px rgba(15, 23, 42, 0.08);
+
+  overflow: hidden;
+
+  animation: sellWindowOpen 0.25s ease-out;
+}
+
+
+/* ================================
+   OPEN ANIMATION
+================================ */
+
+@keyframes sellWindowOpen {
+  from {
+    opacity: 0;
+
+    transform: translate(-50%, 25px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+
+/* ================================
+   SELL HEADER
+================================ */
+
+.sell-window .header {
+  width: 100%;
+
+  background: linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626
+  );
+
+  padding: 18px 22px;
+
+  box-sizing: border-box;
+}
+
+
+/* ================================
+   HEADER TEXT
+================================ */
+
+.sell-window .header h3 {
+  color: #ffffff;
+
+  font-size: 1.05rem;
+
+  font-weight: 600;
+
+  margin: 0 0 6px;
+}
+
+.sell-window .header h3 span {
+  font-size: 0.65rem;
+
+  opacity: 0.8;
+}
+
+
+/* ================================
+   MARKET OPTIONS
+================================ */
+
+.sell-window .market-options {
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 0.78rem;
+}
+
+.sell-window .market-options label {
+  margin-right: 10px;
+
+  cursor: pointer;
+}
+
+.sell-window .market-options input[type="radio"] {
+  cursor: pointer;
+
+  margin-right: 5px;
+}
+
+
+/* ================================
+   TABS
+================================ */
+
+.sell-window .tab {
+  width: 100%;
+
+  background: #fff5f5;
+
+  border-bottom: 1px solid #fee2e2;
+}
+
+.sell-window .tab button {
+  border: none;
+
+  padding: 13px 20px;
+
+  background: transparent;
+
+  color: #dc2626;
+
+  font-weight: 600;
+
+  font-size: 0.82rem;
+
+  cursor: pointer;
+}
+
+
+/* ================================
+   ORDER SECTION
+================================ */
+
+.sell-window .regular-order {
+  padding: 24px;
+
+  background: #ffffff;
+}
+
+
+/* ================================
+   INPUTS
+================================ */
+
+.sell-window .inputs {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-top: 10px;
+
+  margin-bottom: 20px;
+}
+
+
+/* ================================
+   INPUT FIELD
+================================ */
+
+.sell-window .inputs fieldset {
+  flex: 1;
+
+  max-width: none;
+
+  border: 1px solid #d9e1ea;
+
+  border-radius: 8px;
+
+  margin: 0;
+
+  padding: 2px 10px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* ================================
+   LEGEND
+================================ */
+
+.sell-window .inputs fieldset legend {
+  margin-left: 5px;
+
+  font-size: 0.72rem;
+
+  font-weight: 500;
+
+  color: #64748b;
+
+  padding: 0 5px;
+
+  background: #ffffff;
+}
+
+
+/* ================================
+   INPUT
+================================ */
+
+.sell-window .inputs fieldset input {
+  width: 100%;
+
+  border: none;
+
+  margin: 0;
+
+  min-height: 42px;
+
+  padding: 0 6px;
+
+  box-sizing: border-box;
+
+  font-size: 1.05rem;
+
+  font-weight: 500;
+
+  color: #1e293b;
+
+  background: transparent;
+}
+
+
+/* Remove number arrows */
+
+.sell-window .inputs fieldset input::-webkit-inner-spin-button,
+.sell-window .inputs fieldset input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+
+  margin: 0;
+}
+
+.sell-window .inputs fieldset input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+/* ================================
+   INPUT FOCUS
+================================ */
+
+.sell-window .inputs fieldset:focus-within {
+  border-color: #ef4444;
+
+  box-shadow:
+    0 0 0 3px rgba(239, 68, 68, 0.1);
+
+  transform: translateY(-1px);
+}
+
+.sell-window .inputs fieldset input:focus {
+  outline: none;
+}
+
+
+/* ================================
+   BOTTOM AREA
+================================ */
+
+.sell-window .buttons {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 18px 24px;
+
+  background: #fffafa;
+
+  border-top: 1px solid #fee2e2;
+}
+
+
+/* ================================
+   AMOUNT RECEIVED
+================================ */
+
+.sell-window .buttons > span {
+  font-size: 0.78rem;
+
+  color: #64748b;
+
+  line-height: 1.5;
+
+  font-weight: 500;
+}
+
+
+/* ================================
+   BUTTON CONTAINER
+================================ */
+
+.sell-window .buttons > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+/* ================================
+   SELL BUTTON
+================================ */
+
+.sell-window .btn-sell {
+  text-decoration: none;
+
+  padding: 10px 20px;
+
+  min-width: 72px;
+
+  border-radius: 7px;
+
+  background: linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626
+  );
+
+  color: #ffffff;
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-shadow:
+    0 4px 10px rgba(239, 68, 68, 0.22);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sell-window .btn-sell:hover {
+  background: linear-gradient(
+    135deg,
+    #dc2626,
+    #b91c1c
+  );
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 14px rgba(239, 68, 68, 0.28);
+}
+
+
+/* ================================
+   CANCEL BUTTON
+================================ */
+
+.sell-window .btn-grey {
+  text-decoration: none;
+
+  padding: 10px 20px;
+
+  min-width: 72px;
+
+  border-radius: 7px;
+
+  background: #e2e8f0;
+
+  color: #475569;
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.sell-window .btn-grey:hover {
+  background: #cbd5e1;
+
+  color: #1e293b;
+
+  transform: translateY(-1px);
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+  .sell-window {
+    width: 94%;
+
+    max-width: 94%;
+
+    bottom: 15px;
+  }
+
+  .sell-window .regular-order {
+    padding: 20px;
+  }
+
+  .sell-window .buttons {
+    padding: 16px 20px;
+  }
+}
+
+
+@media (max-width: 420px) {
+
+  .sell-window .inputs {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .sell-window .inputs fieldset {
+    width: 100%;
+  }
+
+  .sell-window .buttons {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .sell-window .buttons > span {
+    text-align: center;
+  }
+
+  .sell-window .buttons > div {
+    justify-content: center;
+  }
+}
+.btn-sell {
+  text-decoration: none;
+  padding: 10px 20px;
+  min-width: 72px;
+  border-radius: 7px;
+
+  background: linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626
+  );
+
+  color: #ffffff;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.22);
+
+  transition: 0.2s ease;
+}
+
+.btn-sell:hover {
+  background: linear-gradient(
+    135deg,
+    #dc2626,
+    #b91c1c
+  );
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 6px 14px rgba(239, 68, 68, 0.28);
+}

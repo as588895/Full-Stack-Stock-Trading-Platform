@@ -1,0 +1,129 @@
+/* ========================================= */
+/* TOP BAR */
+/* ========================================= */
+
+.topbar-container {
+  position: fixed;
+
+  top: 0;
+  left: 230px;
+  right: 0;
+
+  height: 70px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 25px;
+
+  box-sizing: border-box;
+
+  z-index: 900;
+}
+
+
+/* ========================================= */
+/* INDICES */
+/* ========================================= */
+
+.indices-container {
+  display: flex;
+
+  align-items: center;
+
+  gap: 35px;
+}
+
+
+.nifty,
+.sensex {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.index {
+  margin: 0;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #555;
+}
+
+
+.index-points {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #777;
+}
+
+
+.percent {
+  margin: 0;
+}
+
+
+/* ========================================= */
+/* TOP RIGHT USER */
+/* ========================================= */
+
+.topbar-user {
+  margin-left: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.notification-icon {
+  font-size: 18px;
+
+  cursor: pointer;
+
+  margin-right: 8px;
+}
+
+
+.topbar-avatar {
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: #387ed1;
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+
+.topbar-username {
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: #222;
+}

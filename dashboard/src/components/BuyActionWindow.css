@@ -1,367 +1,843 @@
+/* ================================
+   BUY / SELL ORDER WINDOW
+================================ */
+
 .container {
-    --radius: 4px;
-    width: 40%;
-    height: 63%;
-    background: rgb(245, 245, 245);
-    position: absolute;
-    bottom: 0;
-    left: 35%;
-    cursor: move;
-    box-sizing: border-box;
-    z-index: 100;
-    border-radius: var(--radius);
-    border: 1px solid rgb(238, 238, 238);
-  }
-  
-  .dragging {
+  --radius: 12px;
+
+  width: 420px;
+  max-width: 92%;
+  min-height: 300px;
+
+  background: #ffffff;
+  position: fixed;
+
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  cursor: move;
+  box-sizing: border-box;
+
+  z-index: 1000;
+
+  border-radius: var(--radius);
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.18),
+    0 5px 15px rgba(15, 23, 42, 0.08);
+
+  overflow: hidden;
+
+  animation: orderWindowOpen 0.25s ease-out;
+}
+
+
+/* ================================
+   OPEN ANIMATION
+================================ */
+
+@keyframes orderWindowOpen {
+  from {
     opacity: 0;
-  }
-  
-  .container .header {
-    width: 100%;
-    background: #4184f3;
-    box-sizing: border-box;
-    padding: 16px;
-    border-top-left-radius: var(--radius);
-    border-top-right-radius: var(--radius);
-  }
-  
-  .header h3 {
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 6px;
-  }
-  
-  .header h3 span {
-    font-size: 0.6rem;
-  }
-  
-  .market-options {
-    font-weight: 300;
-    color: #fff;
-    font-size: 0.8rem;
-  }
-  
-  .market-options label,
-  .order-validity label input,
-  .sub-order-type label,
-  .sub-order-type label input,
-  .stop-loss-type label,
-  .stop-loss-type label input {
-    margin-right: 6px;
-    cursor: pointer;
-  }
-  
-  .market-options input[type="radio"] {
-    border: 1px solid #ddd;
-    cursor: pointer;
-    padding: 2px;
-    margin-right: 6px;
-  }
-  
-  .tab {
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-    border-bottom: 2px solid rgba(180, 180, 180, 0.6);
-  }
-  
-  .tab button {
-    border: none;
-    padding: 14px 16px;
-    background: transparent;
-    color: #4184f3;
-    font-weight: 400;
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-  
-  .regular-order {
-    padding: 16px 26px;
-    background-color: #fff;
-    padding-bottom: 30px;
-  }
-  
-  .regular-order label {
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-  
-  .order-validity {
-    width: 70%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .order-validity label span {
-    color: rgb(190, 190, 190);
-  }
-  
-  .inputs {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .inputs fieldset {
-    max-width: 120px;
-    box-sizing: border-box;
-    border: 0.7px solid #ddd;
-    margin-right: 8px;
-  }
-  
-  .inputs fieldset legend {
-    margin-left: 10px;
-    font-size: 0.8rem;
-    padding: 0 4px;
-  }
-  
-  .inputs fieldset:last-of-type legend {
-    color: #ddd;
-  }
-  
-  .inputs fieldset input {
-    border: none;
-    margin-right: 8px;
-    max-width: 130px;
-    min-height: 35px;
-    padding: 0 12px;
-    box-sizing: border-box;
-    font-size: 1.1rem;
-  }
-  
-  .options {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .options span {
-    color: #4184f3;
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-  
-  .buttons {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    top: 10%;
-    padding: 0 20px;
-  }
-  
-  .buttons span {
-    font-size: 0.8rem;
-  }
-  
-  .btn {
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 2px;
-    color: #fff;
-    margin-right: 2px;
-    margin-left: 2px;
-  }
-  
-  .btn-grey {
-    background: #d4d4d4;
-    color: #666666;
-  }
-  
-  .btn-blue {
-    background: #4184f3;
-  }
-  
-  /* sudo selectors */
-  .tab button::after {
-    content: "";
-    width: 100%;
-    height: 3px;
-    display: none;
-    margin-top: 10px;
-    background-color: #4184f3;
-  }
-  
-  .inputs fieldset:focus {
-    outline: none;
-    border: 0.7px solid rgb(49, 49, 49);
-    border-radius: 2px;
-  }
-  
-  .inputs fieldset input:focus {
-    outline: none;
-  }
-  
-  .inputs fieldset input:focus {
-    outline: none;
-  }
-  
-  .inputs fieldset input:disabled {
-    cursor: not-allowed;
-    background-color: transparent;
-  }
-  
-  .btn-blue:hover {
-    background: #74a7fa;
-  }
-  
-  .btn-grey:hover {
-    background: #9b9b9b;
-    color: #fff;
+    transform: translate(-50%, 25px) scale(0.97);
   }
 
-  .buy-popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+
+/* ================================
+   DRAGGING
+================================ */
+
+.dragging {
+  opacity: 0.85;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.container .header {
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.55);
+
+  background: linear-gradient(
+    135deg,
+    #387ed1,
+    #2869b8
+  );
+
+  box-sizing: border-box;
+
+  padding: 18px 22px;
+
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+
+
+/* ================================
+   HEADER TEXT
+================================ */
+
+.header h3 {
+  color: #ffffff;
+
+  font-size: 1.05rem;
+  font-weight: 600;
+
+  margin: 0 0 6px;
+
+  letter-spacing: 0.2px;
+}
+
+.header h3 span {
+  font-size: 0.65rem;
+  opacity: 0.8;
+}
+
+
+/* ================================
+   MARKET OPTIONS
+================================ */
+
+.market-options {
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 0.78rem;
+}
+
+.market-options label {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.market-options input[type="radio"] {
+  accent-color: #ffffff;
+
+  cursor: pointer;
+
+  margin-right: 5px;
+}
+
+
+/* ================================
+   TABS
+================================ */
+
+.tab {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  background: #f8fafc;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tab button {
+  border: none;
+
+  padding: 13px 20px;
+
+  background: transparent;
+
+  color: #387ed1;
+
+  font-weight: 600;
+
+  font-size: 0.82rem;
+
+  cursor: pointer;
+}
+
+
+/* ================================
+   REGULAR ORDER
+================================ */
+
+.regular-order {
+  padding: 24px 24px 20px;
+
+  background: #ffffff;
+}
+
+.regular-order label {
+  font-size: 0.8rem;
+
+  cursor: pointer;
+}
+
+
+/* ================================
+   ORDER VALIDITY
+================================ */
+
+.order-validity {
+  width: 70%;
 
   display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.order-validity label span {
+  color: #94a3b8;
+}
+
+
+/* ================================
+   INPUT SECTION
+================================ */
+
+.inputs {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+
+/* ================================
+   INPUT BOX
+================================ */
+
+.inputs fieldset {
+  flex: 1;
+
+  max-width: none;
+
+  box-sizing: border-box;
+
+  border: 1px solid #d9e1ea;
+
+  border-radius: 8px;
+
+  margin: 0;
+
+  padding: 2px 10px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* ================================
+   INPUT LEGEND
+================================ */
+
+.inputs fieldset legend {
+  margin-left: 5px;
+
+  font-size: 0.72rem;
+
+  font-weight: 500;
+
+  color: #64748b;
+
+  padding: 0 5px;
+
+  background: #ffffff;
+}
+
+
+/* ================================
+   DISABLED PRICE LEGEND
+================================ */
+
+.inputs fieldset:last-of-type legend {
+  color: #64748b;
+}
+
+
+/* ================================
+   INPUT
+================================ */
+
+.inputs fieldset input {
+  width: 100%;
+
+  border: none;
+
+  margin: 0;
+
+  min-height: 42px;
+
+  padding: 0 6px;
+
+  box-sizing: border-box;
+
+  font-size: 1.05rem;
+
+  font-weight: 500;
+
+  color: #1e293b;
+
+  background: transparent;
+}
+
+
+/* Remove number arrows */
+
+.inputs fieldset input::-webkit-inner-spin-button,
+.inputs fieldset input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputs fieldset input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+/* ================================
+   INPUT FOCUS
+================================ */
+
+.inputs fieldset:focus-within {
+  border-color: #387ed1;
+
+  box-shadow:
+    0 0 0 3px rgba(56, 126, 209, 0.1);
+
+  transform: translateY(-1px);
+}
+
+.inputs fieldset input:focus {
+  outline: none;
+}
+
+
+/* ================================
+   DISABLED INPUT
+================================ */
+
+.inputs fieldset input:disabled {
+  cursor: not-allowed;
+
+  background-color: transparent;
+
+  color: #94a3b8;
+}
+
+
+/* ================================
+   OPTIONS
+================================ */
+
+.options {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+}
+
+.options span {
+  color: #387ed1;
+
+  font-size: 0.78rem;
+
+  cursor: pointer;
+}
+
+
+/* ================================
+   BOTTOM BUTTON AREA
+================================ */
+
+.buttons {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  position: relative;
+
+  top: 0;
+
+  padding: 18px 24px;
+
+  background: #f8fafc;
+
+  border-top: 1px solid #e8edf3;
+}
+
+
+/* ================================
+   AMOUNT TEXT
+================================ */
+
+.buttons > span {
+  font-size: 0.78rem;
+
+  color: #64748b;
+
+  line-height: 1.5;
+
+  font-weight: 500;
+}
+
+
+/* ================================
+   BUTTON CONTAINER
+================================ */
+
+.buttons > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+/* ================================
+   COMMON BUTTON
+================================ */
+
+.btn {
+  text-decoration: none;
+
+  padding: 10px 20px;
+
+  border-radius: 7px;
+
+  color: #ffffff;
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
+
+  margin: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 72px;
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+/* ================================
+   BUY / SELL BUTTON
+================================ */
+
+.btn-blue {
+  background: linear-gradient(
+    135deg,
+    #387ed1,
+    #2869b8
+  );
+
+  box-shadow:
+    0 4px 10px rgba(56, 126, 209, 0.22);
+}
+
+.btn-blue:hover {
+  background: linear-gradient(
+    135deg,
+    #2869b8,
+    #1f5a9f
+  );
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 14px rgba(56, 126, 209, 0.28);
+}
+
+.btn-blue:active {
+  transform: translateY(0);
+}
+
+
+/* ================================
+   CANCEL BUTTON
+================================ */
+
+.btn-grey {
+  background: #e2e8f0;
+
+  color: #475569;
+}
+
+.btn-grey:hover {
+  background: #cbd5e1;
+
+  color: #1e293b;
+
+  transform: translateY(-1px);
+}
+
+
+/* ================================
+   OLD TAB UNDERLINE
+================================ */
+
+.tab button::after {
+  content: "";
+
+  width: 100%;
+
+  height: 3px;
+
+  display: none;
+
+  margin-top: 10px;
+
+  background-color: #387ed1;
+}
+
+
+/* ================================
+   SUCCESS / ERROR POPUP OVERLAY
+================================ */
+
+.buy-popup-overlay {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(15, 23, 42, 0.58);
+
+  backdrop-filter: blur(4px);
+
+  display: flex;
+
   justify-content: center;
   align-items: center;
 
   z-index: 99999;
 }
 
+
+/* ================================
+   SUCCESS / ERROR POPUP
+================================ */
+
 .buy-popup {
   position: relative;
+
   width: 380px;
+
   max-width: 90%;
 
-  background: white;
-  border-radius: 12px;
+  background: #ffffff;
 
-  padding: 30px;
+  border-radius: 16px;
+
+  padding: 32px;
 
   text-align: center;
 
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 25px 60px rgba(15, 23, 42, 0.25);
 
   animation: popupScale 0.2s ease-in-out;
 }
 
+
 @keyframes popupScale {
   from {
     transform: scale(0.8);
+
     opacity: 0;
   }
 
   to {
     transform: scale(1);
+
     opacity: 1;
   }
 }
+
+
+/* ================================
+   POPUP CLOSE
+================================ */
 
 .buy-popup-close {
   position: absolute;
 
   top: 10px;
-  right: 15px;
+  right: 14px;
+
+  width: 32px;
+  height: 32px;
 
   border: none;
-  background: transparent;
 
-  font-size: 28px;
+  background: #f1f5f9;
+
+  border-radius: 50%;
+
+  font-size: 22px;
+
   cursor: pointer;
 
-  color: #555;
+  color: #64748b;
+
+  transition: 0.2s;
 }
 
 .buy-popup-close:hover {
-  color: #000;
+  background: #e2e8f0;
+
+  color: #0f172a;
+
+  transform: rotate(90deg);
 }
+
+
+/* ================================
+   SUCCESS ICON
+================================ */
 
 .success-icon {
-  width: 55px;
-  height: 55px;
+  width: 58px;
+  height: 58px;
 
-  margin: 0 auto 15px;
+  margin: 0 auto 16px;
 
   border-radius: 50%;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  background: #28a745;
-  color: white;
+  background: #22c55e;
+
+  color: #ffffff;
 
   font-size: 30px;
+
   font-weight: bold;
+
+  box-shadow:
+    0 8px 20px rgba(34, 197, 94, 0.25);
 }
+
+
+/* ================================
+   ERROR ICON
+================================ */
 
 .error-icon {
-  width: 55px;
-  height: 55px;
+  width: 58px;
+  height: 58px;
 
-  margin: 0 auto 15px;
+  margin: 0 auto 16px;
 
   border-radius: 50%;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  background: #dc3545;
-  color: white;
+  background: #ef4444;
+
+  color: #ffffff;
 
   font-size: 30px;
+
   font-weight: bold;
+
+  box-shadow:
+    0 8px 20px rgba(239, 68, 68, 0.25);
 }
 
-.buy-popup h2 {
-  margin: 10px 0 15px;
 
-  font-size: 24px;
+/* ================================
+   POPUP TEXT
+================================ */
+
+.buy-popup h2 {
+  margin: 10px 0 14px;
+
+  font-size: 23px;
+
+  font-weight: 700;
+
+  color: #0f172a;
 }
 
 .popup-main-text {
-  font-size: 16px;
+  font-size: 15px;
+
+  color: #475569;
+
   margin: 10px 0;
 }
 
 .popup-balance {
-  font-size: 16px;
-  margin: 15px 0 20px;
+  font-size: 15px;
+
+  color: #64748b;
+
+  margin: 18px 0 22px;
 }
 
 .popup-balance strong {
   display: block;
 
-  font-size: 20px;
+  font-size: 21px;
 
   margin-top: 5px;
+
+  color: #0f172a;
 }
+
+
+/* ================================
+   POPUP OK BUTTON
+================================ */
 
 .popup-ok-btn {
   width: 100%;
 
-  padding: 11px;
+  padding: 12px;
 
   border: none;
-  border-radius: 6px;
 
-  background: #387ed1;
-  color: white;
+  border-radius: 8px;
 
-  font-size: 16px;
-  font-weight: 500;
+  background: linear-gradient(
+    135deg,
+    #387ed1,
+    #2869b8
+  );
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 600;
 
   cursor: pointer;
+
+  transition: 0.2s;
 }
 
 .popup-ok-btn:hover {
-  background: #2f6fba;
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 14px rgba(56, 126, 209, 0.25);
 }
-  
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+
+  .container {
+    width: 94%;
+
+    max-width: 94%;
+
+    bottom: 15px;
+
+    min-height: auto;
+  }
+
+  .regular-order {
+    padding: 20px;
+  }
+
+  .inputs {
+    gap: 10px;
+  }
+
+  .buttons {
+    padding: 16px 20px;
+
+    gap: 10px;
+  }
+
+  .buttons > span {
+    font-size: 0.72rem;
+  }
+
+  .btn {
+    padding: 9px 15px;
+
+    min-width: 65px;
+  }
+}
+
+
+@media (max-width: 420px) {
+
+  .inputs {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .inputs fieldset {
+    width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .buttons > span {
+    text-align: center;
+  }
+
+  .buttons > div {
+    justify-content: center;
+  }
+}

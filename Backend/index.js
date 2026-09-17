@@ -453,6 +453,24 @@ app.post("/newOrder", verifyToken, async (req, res) => {
   }
 });
 
+// Order section backend
+app.get("/allOrders", verifyToken, async (req, res) => {
+  try {
+    const allOrders = await OrdersModel.find({
+      userId: req.user.id,
+    }).sort({ createdAt: -1 });
+
+    res.json(allOrders);
+  } catch (err) {
+    console.error("Orders Fetch Error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to fetch orders",
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log("App Started!");
   mongoose.connect(uri);
