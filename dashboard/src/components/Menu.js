@@ -15,6 +15,44 @@ const Menu = ({ user }) => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
+  // Logout function
+  const handleLogout = async () => {
+    const isLocalhost = window.location.hostname === "localhost";
+
+    const backendURL = isLocalhost
+      ? "http://localhost:3002"
+      : "https://full-stack-stock-trading-platform-c4js.onrender.com";
+
+    const frontendURL = isLocalhost
+      ? "http://localhost:3000"
+      : "https://full-stack-stock-trading-platform-2-rouf.onrender.com";
+
+    try {
+      await axios.post(
+        `${backendURL}/api/auth/logout`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+
+      // toast.success("✅ Logout successful!");
+
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+
+      window.location.href = `${frontendURL}/?logout=true`;
+    } catch (err) {
+      console.log(err);
+
+      // Even if API logout fails, go to frontend home page
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+
+      window.location.href = `${frontendURL}/?logout=true`;
+    }
+  };
+
   const menuClass = "menu";
   const activeMenuClass = "menu selected";
 
@@ -34,6 +72,7 @@ const Menu = ({ user }) => {
               </p>
             </Link>
           </li>
+
           <li>
             <Link
               style={{ textDecoration: "none" }}
@@ -45,6 +84,7 @@ const Menu = ({ user }) => {
               </p>
             </Link>
           </li>
+
           <li>
             <Link
               style={{ textDecoration: "none" }}
@@ -56,6 +96,7 @@ const Menu = ({ user }) => {
               </p>
             </Link>
           </li>
+
           <li>
             <Link
               style={{ textDecoration: "none" }}
@@ -67,6 +108,7 @@ const Menu = ({ user }) => {
               </p>
             </Link>
           </li>
+
           <li>
             <Link
               style={{ textDecoration: "none" }}
@@ -78,6 +120,7 @@ const Menu = ({ user }) => {
               </p>
             </Link>
           </li>
+
           <li>
             <Link
               style={{ textDecoration: "none" }}
@@ -90,7 +133,9 @@ const Menu = ({ user }) => {
             </Link>
           </li>
         </ul>
+
         <hr />
+
         <div className="profile" onClick={handleProfileClick}>
           <div className="avatar">
             {user ? user.username.charAt(0).toUpperCase() : "ZU"}
@@ -116,29 +161,7 @@ const Menu = ({ user }) => {
                 <strong>ID:</strong> {user ? user._id : ""}
               </p>
 
-              <button
-                onClick={async () => {
-                  try {
-                    // await axios.post(
-                    //   "http://localhost:3002/api/auth/logout",
-                    await axios.post(
-                      "https://full-stack-stock-trading-platform-c4js.onrender.com/api/auth/logout",
-                      {},
-                      {
-                        withCredentials: true,
-                      },
-                    );
-
-                    // toast.success("✅ Logout successful!");
-                    // window.location.href = "http://localhost:3000";
-                    
-                    window.location.href =
-                      "https://full-stack-stock-trading-platform-2-rouf.onrender.com/?logout=true";
-                  } catch (err) {
-                    console.log(err);
-                  }
-                }}
-              >
+              <button onClick={handleLogout}>
                 Logout
               </button>
             </div>

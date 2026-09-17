@@ -8,23 +8,31 @@ const Home = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Localhost vs Render
+  const isLocalhost = window.location.hostname === "localhost";
+
+  const backendURL = isLocalhost
+    ? "http://localhost:3002"
+    : "https://full-stack-stock-trading-platform-c4js.onrender.com";
+
+  const loginURL = isLocalhost
+    ? "http://localhost:3000/login"
+    : "https://full-stack-stock-trading-platform-1-18oq.onrender.com/login";
+
   useEffect(() => {
     axios
-      // .get("http://localhost:3002/api/auth/me", {
-      //   withCredentials: true,
-      .get("https://full-stack-stock-trading-platform-c4js.onrender.com/api/auth/me", {
-      withCredentials: true,
-
+      .get(`${backendURL}/api/auth/me`, {
+        withCredentials: true,
       })
       .then((res) => {
         setUser(res.data.user);
         setLoading(false);
       })
-      .catch(() => {
-        // window.location.replace("http://localhost:3001/login");
-        window.location.replace("https://full-stack-stock-trading-platform-1-18oq.onrender.com/login");
+      .catch((err) => {
+        console.log("Authentication error:", err);
+        window.location.replace(loginURL);
       });
-  }, []);
+  }, [backendURL, loginURL]);
 
   if (loading) {
     return <h2 style={{ textAlign: "center" }}>Loading...</h2>;

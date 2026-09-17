@@ -20,16 +20,17 @@ const authRoutes = require("./auth/routes/authRoutes");
 const verifyToken = require("./middleware/verifyToken");
 
 // CORS sabse pehle
-app.use(cors({
-    // origin:[
-    //     "http://localhost:3000",
-    //     "http://localhost:3001"
+app.use(
+  cors({
     origin: [
-  "https://full-stack-stock-trading-platform-2-rouf.onrender.com",
-  "https://full-stack-stock-trading-platform-1-18oq.onrender.com",
-],
-    credentials:true
-}));
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://full-stack-stock-trading-platform-2-rouf.onrender.com",
+      "https://full-stack-stock-trading-platform-1-18oq.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 // Body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

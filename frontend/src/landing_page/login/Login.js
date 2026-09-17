@@ -1,12 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import "./Login.css";
-// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function Login() {
-  // const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,65 +11,74 @@ function Login() {
     e.preventDefault();
 
     try {
-      await axios.post(
-        // "http://localhost:3002/api/auth/login",
-        "https://full-stack-stock-trading-platform-c4js.onrender.com/api/auth/login",
+      const isLocalhost = window.location.hostname === "localhost";
+
+      const backendURL = isLocalhost
+        ? "http://localhost:3002"
+        : "https://full-stack-stock-trading-platform-c4js.onrender.com";
+
+      const res = await axios.post(
+        `${backendURL}/api/auth/login`,
         {
           email,
           password,
         },
         {
           withCredentials: true,
-        },
+        }
       );
 
-      // alert(res.data.message);
-      // alert(res.data.message);
+      // Save user information
+      if (res.data.user) {
+        localStorage.setItem(
+          "user",
+          JSON.stringify(res.data.user)
+        );
+      }
 
-toast.success("✅ Login successful!");
+      // Save token
+      if (res.data.token) {
+        localStorage.setItem(
+          "token",
+          res.data.token
+        );
+      }
 
-setTimeout(() => {
-  window.location.href = "https://YOUR-DASHBOARD.onrender.com";
-}, 1200);
+      toast.success("✅ Login successful!");
 
-//       // JWT Token Save
-//       localStorage.setItem("token", res.data.token);
+      const dashboardURL = isLocalhost
+        ? "http://localhost:3001"
+        : "https://full-stack-stock-trading-platform-1-18oq.onrender.com";
 
-//       // User Save
-//       localStorage.setItem("user", JSON.stringify(res.data.user));
+      setTimeout(() => {
+        window.location.href = dashboardURL;
+      }, 1000);
 
-//       // Dashboard open karo
-// navigate("/dashboard");
-// const res = await axios.post(
-//     "http://localhost:3002/api/auth/login",
-//     {
-//         email,
-//         password,
-//     },
-//     {
-//         withCredentials: true,
-//     }
-// );
-
-// window.location.href = "http://localhost:3001";
-window.location.href = "https://full-stack-stock-trading-platform-1-18oq.onrender.com";
-      
     } catch (err) {
-      // alert(err.response?.data?.message || "Login Failed");
-      toast.error(err.response?.data?.message || "Login Failed");
+      console.log("Login Error:", err);
+
+      toast.error(
+        err.response?.data?.message ||
+        "Login Failed"
+      );
     }
   };
 
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={submitHandler}>
+      <form
+        className="login-form"
+        onSubmit={submitHandler}
+      >
         <h1>Login</h1>
 
         <input
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) =>
+            setEmail(e.target.value)
+          }
           required
         />
 
@@ -80,11 +86,15 @@ window.location.href = "https://full-stack-stock-trading-platform-1-18oq.onrende
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) =>
+            setPassword(e.target.value)
+          }
           required
         />
 
-        <button>Login</button>
+        <button type="submit">
+          Login
+        </button>
       </form>
     </div>
   );
