@@ -1,5 +1,6 @@
 const User = require("../../model/UserModel");
 const generateToken = require("../utils/generateToken");
+const WalletModel = require("../../model/WalletModel");
 
 // =======================
 // Signup
@@ -87,6 +88,11 @@ exports.signup = async (req, res) => {
       password,
     });
 
+    await WalletModel.create({
+      userId: user._id,
+      balance: 100000,
+    });
+
     console.log("User Created:", user);
 
     const token = generateToken(user._id);
@@ -96,7 +102,6 @@ exports.signup = async (req, res) => {
       message: "Account Created Successfully",
       token,
     });
-
   } catch (err) {
     console.error("Signup Error:", err);
 
@@ -112,107 +117,80 @@ exports.signup = async (req, res) => {
 // =======================
 
 exports.login = async (req, res) => {
-
   try {
-
     const { email, password } = req.body;
 
     if (!email || !password) {
-
       return res.status(400).json({
         success: false,
         message: "Please enter email & password",
       });
-
     }
 
     const user = await User.findOne({ email });
 
     if (!user) {
-
       return res.status(401).json({
         success: false,
         message: "Invalid Email",
       });
-
     }
 
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
-
       return res.status(401).json({
         success: false,
         message: "Invalid Password",
       });
-
     }
 
     const token = generateToken(user._id);
 
-const isProduction = process.env.NODE_ENV === "production";
+    const isProduction = process.env.NODE_ENV === "production";
 
-res.cookie("token", token, {
-  httpOnly: true,
-  secure: isProduction,
-  sameSite: isProduction ? "none" : "lax",
-});
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
+    });
 
-res.json({
-    message:"Login Successful",
-    token,
-    user
-});
-
+    res.json({
+      message: "Login Successful",
+      token,
+      user,
+    });
   } catch (err) {
-
     console.error("Signup Error:", err);
 
-  res.status(500).json({
-    success: false,
-    message: err.message,
-  });
-
-
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
   }
-
 };
 
 exports.getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
 
-    try {
-
-        const user = await User.findById(req.user.id).select("-password");
-
-        if (!user) {
-
-            return res.status(404).json({
-
-                success:false,
-                message:"User not found"
-
-            });
-
-        }
-
-        res.json({
-
-            success:true,
-            user
-
-        });
-
-    } catch(err){
-
-        res.status(500).json({
-
-            success:false,
-            message:err.message
-
-        });
-
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
     }
 
+    res.json({
+      success: true,
+      user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
 };
 
 // =======================
@@ -220,12 +198,10 @@ exports.getMe = async (req, res) => {
 // =======================
 
 exports.logout = (req, res) => {
+  res.clearCookie("token");
 
-    res.clearCookie("token");
-
-    res.status(200).json({
-        success: true,
-        message: "Logged Out Successfully",
-    });
-
+  res.status(200).json({
+    success: true,
+    message: "Logged Out Successfully",
+  });
 };

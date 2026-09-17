@@ -1,7 +1,40 @@
-const { model } = require("mongoose");
+const mongoose = require("mongoose");
 
-const { OrdersSchema } = require("../schemas/OrdersSchema");
+const ordersSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
 
-const OrdersModel = new model("order", OrdersSchema);
+    name: {
+      type: String,
+      required: true,
+    },
 
-module.exports = { OrdersModel };
+    qty: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
+    mode: {
+      type: String,
+      required: true,
+      enum: ["BUY", "SELL"],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = mongoose.model("Orders", ordersSchema);

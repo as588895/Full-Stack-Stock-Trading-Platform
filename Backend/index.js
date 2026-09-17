@@ -6,9 +6,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
-
 const { PositionsModel } = require("./model/PositionsModel");
-const { OrdersModel } = require("./model/OrdersModel");
+const OrdersModel  = require("./model/OrdersModel");
+const WalletModel = require("./model/WalletModel");
+console.log("WalletModel:", WalletModel);
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGODB_URL;
@@ -29,7 +30,7 @@ app.use(
       "https://full-stack-stock-trading-platform-1-18oq.onrender.com",
     ],
     credentials: true,
-  })
+  }),
 );
 // Body Parser
 app.use(express.json());
@@ -40,6 +41,8 @@ app.use(cookieParser());
 
 // Auth Routes
 app.use("/api/auth", authRoutes);
+// orderRoutes
+// app.use("/api/orders", orderRoutes);
 
 // app.get("/addHoldings", async (req, res) => {
 //   let tempHoldings = [
@@ -210,9 +213,21 @@ app.use("/api/auth", authRoutes);
 //   res.send("Done!");
 // });
 
-app.get("/allHoldings", async (req, res) => {
-  let allHoldings = await HoldingsModel.find({});
-  res.json(allHoldings);
+app.get("/allHoldings", verifyToken, async (req, res) => {
+  try {
+    const allHoldings = await HoldingsModel.find({
+      userId: req.user.id,
+    });
+
+    res.json(allHoldings);
+  } catch (err) {
+    console.error("Holdings Error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
 });
 
 app.get("/allPositions", async (req, res) => {
@@ -222,29 +237,220 @@ app.get("/allPositions", async (req, res) => {
 
 // for dashboard
 app.get("/dashboard", verifyToken, (req, res) => {
+  res.json({
+    success: true,
+    message: "Welcome Dashboard",
 
-    res.json({
-
-        success: true,
-        message: "Welcome Dashboard",
-
-        user: req.user,
-
-    });
-
+    user: req.user,
+  });
 });
 
-app.post("/newOrder", async (req, res) => {
-  let newOrder = new OrdersModel({
-    name: req.body.name,
-    qty: req.body.qty,
-    price: req.body.price,
-    mode: req.body.mode,
-  });
+app.post("/newOrder", verifyToken, async (req, res) => {
+  console.log("NEW ORDER REQUEST:", req.body);
+  try {
+    const { name, qty, price, mode } = req.body;
 
-  newOrder.save();
+    const quantity = Number(qty);
+    const stockPrice = Number(price);
 
-  res.send("Order saved!");
+    // Validate order details
+    if (
+      !name ||
+      !quantity ||
+      !stockPrice ||
+      !["BUY", "SELL"].includes(mode)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid order details",
+      });
+    }
+
+    if (quantity <= 0 || stockPrice <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Quantity and price must be greater than 0",
+      });
+    }
+
+    const userId = req.user.id;
+
+    // =====================================================
+    // SELL ORDER
+    // =====================================================
+
+    if (mode === "SELL") {
+      const holding = await HoldingsModel.findOne({
+        userId: userId,
+        name: name,
+      });
+
+      // User doesn't own this stock
+      if (!holding) {
+        return res.status(400).json({
+          success: false,
+          message: "You do not own this stock",
+        });
+      }
+
+      // Not enough shares
+      if (holding.qty < quantity) {
+        return res.status(400).json({
+          success: false,
+          message: `Insufficient holdings. You own only ${holding.qty} shares`,
+          availableQuantity: holding.qty,
+        });
+      }
+
+      const totalAmount = quantity * stockPrice;
+
+      // Find wallet
+      let wallet = await WalletModel.findOne({
+        userId: userId,
+      });
+
+      // Create wallet if it doesn't exist
+      if (!wallet) {
+        wallet = await WalletModel.create({
+          userId: userId,
+          balance: 100000,
+        });
+      }
+
+      // Add sold amount to wallet
+      wallet.balance += totalAmount;
+
+      await wallet.save();
+
+      // Reduce holding quantity
+      holding.qty -= quantity;
+
+      // Update current price
+      holding.price = stockPrice;
+
+      // If all shares are sold, delete holding
+      if (holding.qty === 0) {
+        await HoldingsModel.deleteOne({
+          _id: holding._id,
+        });
+      } else {
+        await holding.save();
+      }
+
+      // Save SELL order
+      const newOrder = await OrdersModel.create({
+        userId: userId,
+        name: name,
+        qty: quantity,
+        price: stockPrice,
+        mode: "SELL",
+      });
+
+      return res.status(201).json({
+        success: true,
+        message: "Sell order executed successfully",
+        order: newOrder,
+        walletBalance: wallet.balance,
+        soldAmount: totalAmount,
+      });
+    }
+
+    // =====================================================
+    // BUY ORDER
+    // =====================================================
+
+    if (mode === "BUY") {
+      // Find wallet
+      let wallet = await WalletModel.findOne({
+        userId: userId,
+      });
+
+      // Create wallet if it doesn't exist
+      if (!wallet) {
+        wallet = await WalletModel.create({
+          userId: userId,
+          balance: 100000,
+        });
+      }
+
+      const totalAmount = quantity * stockPrice;
+
+      // Check wallet balance
+      if (wallet.balance < totalAmount) {
+        return res.status(400).json({
+          success: false,
+          message: "Insufficient wallet balance",
+          required: totalAmount,
+          available: wallet.balance,
+        });
+      }
+
+      // Deduct money
+      wallet.balance -= totalAmount;
+
+      await wallet.save();
+
+      // Find existing holding
+      let holding = await HoldingsModel.findOne({
+        userId: userId,
+        name: name,
+      });
+
+      if (holding) {
+        const oldQuantity = holding.qty;
+        const oldAverage = holding.avg;
+
+        const newQuantity = oldQuantity + quantity;
+
+        const newAverage =
+          (oldQuantity * oldAverage +
+            quantity * stockPrice) /
+          newQuantity;
+
+        holding.qty = newQuantity;
+        holding.avg = newAverage;
+        holding.price = stockPrice;
+
+        await holding.save();
+      } else {
+        // Create new holding
+        holding = await HoldingsModel.create({
+          userId: userId,
+          name: name,
+          qty: quantity,
+          avg: stockPrice,
+          price: stockPrice,
+          net: "0.00%",
+          day: "0.00%",
+        });
+      }
+
+      // Save BUY order
+      const newOrder = await OrdersModel.create({
+        userId: userId,
+        name: name,
+        qty: quantity,
+        price: stockPrice,
+        mode: "BUY",
+      });
+
+      return res.status(201).json({
+        success: true,
+        message: "Buy order executed successfully",
+        order: newOrder,
+        holding: holding,
+        walletBalance: wallet.balance,
+      });
+    }
+
+  } catch (err) {
+    console.error("Order Error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
 });
 
 app.listen(PORT, () => {
