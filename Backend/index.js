@@ -246,6 +246,106 @@ app.get("/wallet", verifyToken, async (req, res) => {
   }
 });
 
+// =====================================================
+// ADD FUNDS
+// =====================================================
+console.log("WALLET ROUTES LOADED");
+
+app.post("/wallet/add", verifyToken, async (req, res) => {
+  try {
+    const amount = Number(req.body.amount);
+
+    if (!amount || amount <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid amount",
+      });
+    }
+
+    const userId = req.user.id;
+
+    let wallet = await WalletModel.findOne({ userId });
+
+    if (!wallet) {
+      wallet = await WalletModel.create({
+        userId,
+        balance: 100000,
+      });
+    }
+
+    wallet.balance += amount;
+
+    await wallet.save();
+
+    res.json({
+      success: true,
+      message: "Funds added successfully",
+      balance: wallet.balance,
+    });
+  } catch (err) {
+    console.error("Add Funds Error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to add funds",
+    });
+  }
+});
+
+
+// =====================================================
+// WITHDRAW FUNDS
+// =====================================================
+
+app.post("/wallet/withdraw", verifyToken, async (req, res) => {
+  try {
+    const amount = Number(req.body.amount);
+
+    if (!amount || amount <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Enter a valid amount",
+      });
+    }
+
+    const userId = req.user.id;
+
+    let wallet = await WalletModel.findOne({ userId });
+
+    if (!wallet) {
+      wallet = await WalletModel.create({
+        userId,
+        balance: 100000,
+      });
+    }
+
+    if (wallet.balance < amount) {
+      return res.status(400).json({
+        success: false,
+        message: "Insufficient wallet balance",
+        available: wallet.balance,
+      });
+    }
+
+    wallet.balance -= amount;
+
+    await wallet.save();
+
+    res.json({
+      success: true,
+      message: "Withdrawal successful",
+      balance: wallet.balance,
+    });
+  } catch (err) {
+    console.error("Withdraw Error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to withdraw funds",
+    });
+  }
+});
+
 
 app.get("/allPositions", async (req, res) => {
   let allPositions = await PositionsModel.find({});
