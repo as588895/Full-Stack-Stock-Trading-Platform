@@ -24,8 +24,8 @@
   background:
     linear-gradient(
       180deg,
-      #f0f966 0%,
-      #c6cf3d 100%
+      #e6f603 0%,
+      #64646336 100%
     );
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -303,10 +303,10 @@
 
   white-space: nowrap;
 
-  color: #d90808b9;
+  color: #180101b9;
 
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 800;
 }
 
 
@@ -372,7 +372,7 @@
 
   padding-bottom: 10px;
 
-  color: #e30909;
+  color: #b7bd0e;
 
   font-size: 10px;
 
@@ -406,7 +406,7 @@
   background:
     rgba(239, 68, 68, 0.08);
 
-  color: #f87171;
+  color: #241bd2;
 
   font-family: inherit;
 

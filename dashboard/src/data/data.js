@@ -172,22 +172,31 @@ export const holdings = [
 export const positions = [
   {
     product: "CNC",
-    name: "EVEREADY",
+    name: "INFY",
     qty: 2,
-    avg: 316.27,
-    price: 312.35,
-    net: "+0.58%",
-    day: "-1.24%",
+    avg: 1500,
+    price: 1550,
+    day: "+1.25%",
+    isLoss: false,
+  },
+
+  {
+    product: "MIS",
+    name: "TCS",
+    qty: 3,
+    avg: 3200,
+    price: 3150,
+    day: "-0.80%",
     isLoss: true,
   },
+
   {
     product: "CNC",
-    name: "JUBLFOOD",
+    name: "RELIANCE",
     qty: 1,
-    avg: 3124.75,
-    price: 3082.65,
-    net: "+10.04%",
-    day: "-1.35%",
-    isLoss: true,
+    avg: 2800,
+    price: 2900,
+    day: "+1.40%",
+    isLoss: false,
   },
 ];
