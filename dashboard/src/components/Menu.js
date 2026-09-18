@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// import { toast } from "react-toastify";
+import "./Menu.css";
 
 const Menu = ({ user }) => {
   const [selectedMenu, setSelectedMenu] = useState(0);
@@ -11,7 +11,7 @@ const Menu = ({ user }) => {
     setSelectedMenu(index);
   };
 
-  const handleProfileClick = (index) => {
+  const handleProfileClick = () => {
     setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
@@ -36,8 +36,6 @@ const Menu = ({ user }) => {
         }
       );
 
-      // toast.success("✅ Logout successful!");
-
       localStorage.removeItem("user");
       localStorage.removeItem("token");
 
@@ -45,7 +43,6 @@ const Menu = ({ user }) => {
     } catch (err) {
       console.log(err);
 
-      // Even if API logout fails, go to frontend home page
       localStorage.removeItem("user");
       localStorage.removeItem("token");
 
@@ -58,16 +55,30 @@ const Menu = ({ user }) => {
 
   return (
     <div className="menu-container">
-      <img src="logo.png" alt="Logo" style={{ width: "50px" }} />
+
+      {/* LOGO */}
+      <div className="menu-logo">
+        <img src="logo.png" alt="Logo" />
+      </div>
+
+      {/* MENUS */}
       <div className="menus">
+
         <ul>
+
           <li>
             <Link
               style={{ textDecoration: "none" }}
               to="/"
               onClick={() => handleMenuClick(0)}
             >
-              <p className={selectedMenu === 0 ? activeMenuClass : menuClass}>
+              <p
+                className={
+                  selectedMenu === 0
+                    ? activeMenuClass
+                    : menuClass
+                }
+              >
                 Dashboard
               </p>
             </Link>
@@ -79,7 +90,13 @@ const Menu = ({ user }) => {
               to="/orders"
               onClick={() => handleMenuClick(1)}
             >
-              <p className={selectedMenu === 1 ? activeMenuClass : menuClass}>
+              <p
+                className={
+                  selectedMenu === 1
+                    ? activeMenuClass
+                    : menuClass
+                }
+              >
                 Orders
               </p>
             </Link>
@@ -91,7 +108,13 @@ const Menu = ({ user }) => {
               to="/holdings"
               onClick={() => handleMenuClick(2)}
             >
-              <p className={selectedMenu === 2 ? activeMenuClass : menuClass}>
+              <p
+                className={
+                  selectedMenu === 2
+                    ? activeMenuClass
+                    : menuClass
+                }
+              >
                 Holdings
               </p>
             </Link>
@@ -103,7 +126,13 @@ const Menu = ({ user }) => {
               to="/positions"
               onClick={() => handleMenuClick(3)}
             >
-              <p className={selectedMenu === 3 ? activeMenuClass : menuClass}>
+              <p
+                className={
+                  selectedMenu === 3
+                    ? activeMenuClass
+                    : menuClass
+                }
+              >
                 Positions
               </p>
             </Link>
@@ -115,7 +144,13 @@ const Menu = ({ user }) => {
               to="funds"
               onClick={() => handleMenuClick(4)}
             >
-              <p className={selectedMenu === 4 ? activeMenuClass : menuClass}>
+              <p
+                className={
+                  selectedMenu === 4
+                    ? activeMenuClass
+                    : menuClass
+                }
+              >
                 Funds
               </p>
             </Link>
@@ -127,47 +162,60 @@ const Menu = ({ user }) => {
               to="/apps"
               onClick={() => handleMenuClick(6)}
             >
-              <p className={selectedMenu === 6 ? activeMenuClass : menuClass}>
+              <p
+                className={
+                  selectedMenu === 6
+                    ? activeMenuClass
+                    : menuClass
+                }
+              >
                 Apps
               </p>
             </Link>
           </li>
+
         </ul>
 
         <hr />
 
-        <div className="profile" onClick={handleProfileClick}>
+        {/* PROFILE */}
+        <div
+          className="profile"
+          onClick={handleProfileClick}
+        >
+
           <div className="avatar">
-            {user ? user.username.charAt(0).toUpperCase() : "ZU"}
+            {user
+              ? user.username.charAt(0).toUpperCase()
+              : "U"}
           </div>
 
-          <p className="username">{user ? user.username : "USERID"}</p>
+          <p className="username">
+            {user ? user.username : "USERID"}
+          </p>
 
           {isProfileDropdownOpen && (
-            <div
-              style={{
-                position: "absolute",
-                top: "60px",
-                right: "20px",
-                background: "#fff",
-                border: "1px solid #ddd",
-                borderRadius: "6px",
-                padding: "10px",
-                boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
-                zIndex: 1000,
-              }}
-            >
-              <p style={{ margin: "0 0 8px 0" }}>
-                <strong>ID:</strong> {user ? user._id : ""}
+            <div className="profile-dropdown">
+
+              <p className="profile-id">
+                <strong>ID:</strong>{" "}
+                {user ? user._id : ""}
               </p>
 
-              <button onClick={handleLogout}>
+              <button
+                className="logout-btn"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
+
             </div>
           )}
+
         </div>
+
       </div>
+
     </div>
   );
 };

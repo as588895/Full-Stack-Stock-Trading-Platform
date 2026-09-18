@@ -1,5 +1,6 @@
 import React from "react";
 import Menu from "./Menu";
+import "./TopBar.css";
 
 const TopBar = ({ user }) => {
   return (

@@ -7,7 +7,7 @@ const cors = require("cors");
 
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
-const OrdersModel  = require("./model/OrdersModel");
+const OrdersModel = require("./model/OrdersModel");
 const WalletModel = require("./model/WalletModel");
 console.log("WalletModel:", WalletModel);
 
@@ -230,6 +230,23 @@ app.get("/allHoldings", verifyToken, async (req, res) => {
   }
 });
 
+app.get("/wallet", verifyToken, async (req, res) => {
+  try {
+    let wallet = await WalletModel.findOne({ userId: req.user.id });
+    if (!wallet) {
+      wallet = await WalletModel.create({
+        userId: req.user.id,
+        balance: 100000,
+      });
+    }
+    res.json({ success: true, balance: wallet.balance });
+  } catch (err) {
+    console.error("Wallet Error:", err);
+    res.status(500).json({ success: false, message: "Unable to fetch wallet" });
+  }
+});
+
+
 app.get("/allPositions", async (req, res) => {
   let allPositions = await PositionsModel.find({});
   res.json(allPositions);
@@ -254,12 +271,7 @@ app.post("/newOrder", verifyToken, async (req, res) => {
     const stockPrice = Number(price);
 
     // Validate order details
-    if (
-      !name ||
-      !quantity ||
-      !stockPrice ||
-      !["BUY", "SELL"].includes(mode)
-    ) {
+    if (!name || !quantity || !stockPrice || !["BUY", "SELL"].includes(mode)) {
       return res.status(400).json({
         success: false,
         message: "Invalid order details",
@@ -403,9 +415,7 @@ app.post("/newOrder", verifyToken, async (req, res) => {
         const newQuantity = oldQuantity + quantity;
 
         const newAverage =
-          (oldQuantity * oldAverage +
-            quantity * stockPrice) /
-          newQuantity;
+          (oldQuantity * oldAverage + quantity * stockPrice) / newQuantity;
 
         holding.qty = newQuantity;
         holding.avg = newAverage;
@@ -442,7 +452,6 @@ app.post("/newOrder", verifyToken, async (req, res) => {
         walletBalance: wallet.balance,
       });
     }
-
   } catch (err) {
     console.error("Order Error:", err);
 
