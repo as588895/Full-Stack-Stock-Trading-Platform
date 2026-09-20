@@ -32,6 +32,13 @@ const HoldingsSchema = new Schema(
       min: 0,
     },
 
+    // Previous closing price
+    previousClose: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
     net: {
       type: String,
       default: "0.00%",
@@ -47,4 +54,4 @@ const HoldingsSchema = new Schema(
   }
 );
 
-module.exports = { HoldingsSchema };
+module.exports = { HoldingsSchema };a

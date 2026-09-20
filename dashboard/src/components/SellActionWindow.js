@@ -29,10 +29,10 @@ const SellActionWindow = ({ uid }) => {
       name: uid,
       qty: Number(stockQuantity),
       price: Number(stockPrice),
-      mode: "SELL",
+      mode: "SELL",    //sell
     };
 
-    console.log("SELL ORDER DATA:", orderData);
+    console.log("SELL ORDER DATA:", orderData);   //order section
 
     try {
       const response = await axios.post(

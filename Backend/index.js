@@ -213,13 +213,69 @@ app.use("/api/auth", authRoutes);
 //   res.send("Done!");
 // });
 
+// app.get("/allHoldings", verifyToken, async (req, res) => {
+//   try {
+//     const allHoldings = await HoldingsModel.find({
+//       userId: req.user.id,
+//     });
+
+//     res.json(allHoldings);
+//   } catch (err) {
+//     console.error("Holdings Error:", err);
+
+//     res.status(500).json({
+//       success: false,
+//       message: err.message,
+//     });
+//   }
+// });
+
 app.get("/allHoldings", verifyToken, async (req, res) => {
   try {
-    const allHoldings = await HoldingsModel.find({
+    const holdings = await HoldingsModel.find({
       userId: req.user.id,
+    }).sort({ createdAt: -1 });
+
+    const formattedHoldings = holdings.map((stock) => {
+      const qty = Number(stock.qty) || 0;
+      const avg = Number(stock.avg) || 0;
+      const price = Number(stock.price) || 0;
+      const previousClose = Number(stock.previousClose) || 0;
+
+      const investedValue = avg * qty;
+      const currentValue = price * qty;
+
+      const pnl = currentValue - investedValue;
+
+      const pnlPercent = investedValue > 0 ? (pnl / investedValue) * 100 : 0;
+
+      const dayChange = previousClose > 0 ? (price - previousClose) * qty : 0;
+
+      const dayChangePercent =
+        previousClose > 0 ? ((price - previousClose) / previousClose) * 100 : 0;
+
+      return {
+        ...stock.toObject(),
+
+        investedValue,
+        currentValue,
+
+        pnl,
+        pnlPercent,
+
+        dayChange,
+        dayChangePercent,
+
+        net: `${pnlPercent >= 0 ? "+" : ""}${pnlPercent.toFixed(2)}%`,
+
+        day:
+          previousClose > 0
+            ? `${dayChangePercent >= 0 ? "+" : ""}${dayChangePercent.toFixed(2)}%`
+            : "0.00%",
+      };
     });
 
-    res.json(allHoldings);
+    res.json(formattedHoldings);
   } catch (err) {
     console.error("Holdings Error:", err);
 
@@ -292,7 +348,6 @@ app.post("/wallet/add", verifyToken, async (req, res) => {
   }
 });
 
-
 // =====================================================
 // WITHDRAW FUNDS
 // =====================================================
@@ -345,7 +400,6 @@ app.post("/wallet/withdraw", verifyToken, async (req, res) => {
     });
   }
 });
-
 
 app.get("/allPositions", async (req, res) => {
   let allPositions = await PositionsModel.find({});
@@ -530,6 +584,10 @@ app.post("/newOrder", verifyToken, async (req, res) => {
           qty: quantity,
           avg: stockPrice,
           price: stockPrice,
+
+          // First purchase price is used as initial previous close
+          previousClose: stockPrice,
+
           net: "0.00%",
           day: "0.00%",
         });
@@ -554,6 +612,31 @@ app.post("/newOrder", verifyToken, async (req, res) => {
     }
   } catch (err) {
     console.error("Order Error:", err);
+
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
+app.get("/updatePreviousClose", async (req, res) => {
+  try {
+    const holdings = await HoldingsModel.find({});
+
+    for (const holding of holdings) {
+      if (!holding.previousClose || holding.previousClose === 0) {
+        holding.previousClose = holding.price;
+        await holding.save();
+      }
+    }
+
+    res.json({
+      success: true,
+      message: "Previous close updated successfully",
+    });
+  } catch (err) {
+    console.error(err);
 
     res.status(500).json({
       success: false,
