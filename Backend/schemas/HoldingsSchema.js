@@ -54,4 +54,4 @@ const HoldingsSchema = new Schema(
   }
 );
 
-module.exports = { HoldingsSchema };a
+module.exports = { HoldingsSchema };
