@@ -1,23 +1,3 @@
-import React from 'react';
-
-function Education() {
-    return ( 
-        <div className='container mt-5'>
-            <div className='row'>
-                <div className='col-6'>
-                    <img src='media/images/education.svg' style={{ width: '70%'}}/>
-                </div>
-                <div className='col-6'>
-                    <h1 className='mb-3 fs-2'>Free and open market education</h1>
-                    <p >Varsity, the largest online stock market education book in the world covering everything from the basics to advanced trading.</p>
-                    <a href='' style={{ textDecoration: 'none' }}>Versity <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-
-                    <p className='mt-5'>Trading Q&A, the most active trading and investment community in India for all your market queries.</p>
-                    <a href='' style={{ textDecoration: 'none' }}>Trading Q&A <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                </div>
-            </div>
-        </div>
-     );
-}
-
+import React from 'react';import {Link} from 'react-router-dom';
+function Education(){return <section className="learning-section"><div className="learning-art"><div className="learning-orbit orbit-a"/><div className="learning-orbit orbit-b"/><div className="book-card"><span className="book-symbol">✳</span><small>FIELD NOTES / 01</small><h3>Learn the<br/>language of<br/><em>markets.</em></h3><div className="book-lines"><i/><i/><i/></div></div><span className="learning-sticker">Curiosity<br/>compounds.</span></div><div className="learning-copy"><span className="section-kicker">KNOWLEDGE IS A SUPERPOWER</span><h2>Invest in your<br/><em>understanding.</em></h2><p>Good decisions start with good questions. Use the platform to explore market concepts, understand your portfolio and keep learning as you go.</p><div className="learning-points"><div><span>01</span><p><b>Start with the basics</b><small>Build a foundation at your own pace.</small></p></div><div><span>02</span><p><b>Understand your activity</b><small>See your portfolio through a clearer lens.</small></p></div><div><span>03</span><p><b>Stay curious</b><small>Keep learning before making decisions.</small></p></div></div><Link to="/products" className="inline-link">Explore platform features <span>↗</span></Link></div></section>}
 export default Education;

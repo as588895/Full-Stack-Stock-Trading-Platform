@@ -1,58 +1,26 @@
 import React from "react";
-import Hero from "./Hero";
-import LeftSection from "./LeftSection";
-import RightSection from "./RightSection";
-import Universe from "./Universe";
+import { Link } from "react-router-dom";
+
+const features = [
+  { number: "01", icon: "bi-binoculars", title: "Northstar Markets", tag: "DISCOVER", description: "Keep the market in view with a focused workspace for exploring instruments and following the names that matter to you." },
+  { number: "02", icon: "bi-pie-chart", title: "Portfolio Console", tag: "UNDERSTAND", description: "Review holdings, positions and account activity in one organized place, with a clearer view of your investing journey." },
+  { number: "03", icon: "bi-activity", title: "Orders & Activity", tag: "TAKE ACTION", description: "Keep track of your order flow and recent activity through a streamlined interface designed to reduce clutter." },
+  { number: "04", icon: "bi-journal-bookmark", title: "Learning Desk", tag: "BUILD KNOWLEDGE", description: "Explore core market concepts and build confidence through curiosity, research and thoughtful practice." },
+];
 
 function ProductPage() {
-  return (
-    <>
-      <Hero />
-      <LeftSection
-        imageURL="media/images/kite.png"
-        productName="Kite"
-        productDescription="Our ultra-fast flagship trading platform with streaming market data, advanced charts, an elegnat UI, and more. Enjoy the Kite experience seamlessly on your Android and iOS devices."
-        tryDemo=""
-        learnMore=""
-        googlePlay=""
-        appStore=""
-      />
-      <RightSection
-        imageURL="media/images/console.png"
-        productName="Console"
-        productDescription="The central dashboard for your Zerodha account. Gain insights into your trades and investments with in-depth reports and visualizations."
-        learnMore=""
-      />
-      <LeftSection
-        imageURL="media/images/coin.png"
-        productName="Coin"
-        productDescription="But direct mutual fund online, commission free, delivery directly to your Demat Account. Enjoy the investment experience on your Android and iOS devices."
-        tryDemo=""
-        learnMore=""
-        googlePlay=""
-        appStore=""
-      />
-      <RightSection
-        imageURL="media/images/kiteconnect.png"
-        productName="Kite Connect API"
-        productDescription="Build powerful trading platforms and experiences with our super simple HTTP/JSON APIs. If you are a startup, build your investment app and showcase it our clientbase."
-        learnMore=""
-      />
-      <LeftSection
-        imageURL="media/images/varsity.png"
-        productName="Varsity Mobile"
-        productDescription="An easy to grap, collection of stock market lessons with in-depth coverage and illustrations. Content is broken down into bite-size cards to help you learn on the go."
-        tryDemo=""
-        learnMore=""
-        googlePlay=""
-        appStore=""
-      />
-      <p className="text-center mt-5 mb-5">
-        Want to know more about our technology stack? Check out the Zerodha.tech blog.
-      </p>
-      <Universe />
-    </>
-  );
+  return <main className="northstar-page">
+    <section className="inner-hero product-hero">
+      <span className="section-kicker">THE NORTHSTAR TOOLKIT</span>
+      <h1>Everything in view.<br/><em>Nothing in the way.</em></h1>
+      <p>A considered set of tools for exploring markets, following your portfolio and understanding your activity—without the unnecessary noise.</p>
+      <div className="inner-hero-metrics"><div><b>01</b><span>Explore markets</span></div><div><b>02</b><span>Follow your portfolio</span></div><div><b>03</b><span>Learn at your pace</span></div></div>
+    </section>
+    <section className="product-grid-section">
+      <div className="product-section-heading"><div><span className="section-kicker">BUILT AROUND YOUR WORKFLOW</span><h2>One workspace.<br/><em>More perspective.</em></h2></div><p>Northstar is a student-built trading platform concept. The product descriptions below explain the intended experience; availability depends on the connected demo application.</p></div>
+      <div className="northstar-product-grid">{features.map((item) => <article className="northstar-product-card" key={item.number}><div className="product-card-top"><span className="product-icon"><i className={`bi ${item.icon}`}/></span><span className="product-index">{item.number} / 04</span></div><span className="product-tag">{item.tag}</span><h3>{item.title}</h3><p>{item.description}</p><Link to="/signup" className="product-card-link">Explore Northstar <span>↗</span></Link></article>)}</div>
+    </section>
+    <section className="product-bottom-cta"><div><span className="section-kicker">READY WHEN YOU ARE</span><h2>Start with curiosity.<br/><em>Grow with clarity.</em></h2></div><Link to="/signup" className="primary-action">Create your account <span>↗</span></Link></section>
+  </main>;
 }
-
 export default ProductPage;

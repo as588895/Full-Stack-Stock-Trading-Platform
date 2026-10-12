@@ -1,33 +1,3 @@
-import React from 'react';
-
-function Stats() {
-    return (
-        <div className='container p-3 mb-5'>
-            <div className='row p-5'>
-                <div className='col-6 p-5'>
-                    <h1 className='fs-2 mb-5'>Trust with confidence</h1>
-                    <h2 className='fs-4'>Customer-first always</h2>
-                    <p className='text-muted'>That's why 1.3+ crore customers trust Zerodha with 3.5+ lakh crore worth of equity investments.</p>
-                    
-                    <h2 className='fs-4'>No spam or gimmicks</h2>
-                    <p className='text-muted'>No gimmicks spam,"gamification", or annoying push notifications.High quality app that you use at your pace, the way you like.</p>
-                  
-                    <h2 className='fs-4'>The Zerodha Universe</h2>
-                    <p className='text-muted'>Not just an app, but a whole ecosystem. Our investments in 30+ fintech startup offer you tailored services specific to your needs.</p>
-
-                    <h2 className='fs-4'>Do better with money</h2>
-                    <p className='text-muted'>With initiatives like Nudge and Kill Switch, we don't just facilitate transactions, but actively help you make better with your money.</p>
-                </div>
-                <div className='col-6 p-5'>
-                    <img src='media/images/ecosystem.png' style={{ width: '115%' }} />
-                    <div className='text-center'>
-                        <a href='' className='mx-5' style={{ textDecoration: 'none' }}>Explore our products <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                        <a href='' style={{ textDecoration: 'none' }}>Try Kite Demo <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
+import React from 'react';import {Link} from 'react-router-dom';
+function Stats(){return <section className="section-wrap value-section"><div className="section-intro"><span className="section-kicker">THE NORTHSTAR APPROACH</span><h2>Less noise.<br/><em>More perspective.</em></h2><p>Markets move quickly. Your investing workspace should help you think clearly—not add to the noise.</p><Link className="inline-link" to="/about">Get to know us <span>↗</span></Link></div><div className="value-grid"><article className="value-card value-card-dark"><span className="value-icon">◈</span><h3>Clarity by design</h3><p>Bring key portfolio information into a clean, easy-to-follow view.</p><span className="card-index">01 / FOCUS</span></article><article className="value-card"><span className="value-icon">⌁</span><h3>Tools that fit your pace</h3><p>Explore the market and your positions without unnecessary distractions.</p><span className="card-index">02 / CONTROL</span></article><article className="value-card"><span className="value-icon">✳</span><h3>Learn while you grow</h3><p>Build your understanding with resources that make complex topics approachable.</p><span className="card-index">03 / LEARN</span></article><article className="value-card value-card-lime"><span className="value-icon">↗</span><h3>Keep goals in view</h3><p>Make room for thoughtful decisions, with your long-term goals in focus.</p><span className="card-index">04 / DIRECTION</span></article></div></section>}
 export default Stats;

@@ -1,84 +1,57 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 function Navbar() {
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const links = [
+    ["Products", "/products"],
+    ["Pricing", "/pricing"],
+    ["About", "/about"],
+    ["Support", "/supports"],
+  ];
   return (
-    <nav
-      className="navbar navbar-expand-lg border-bottom fixed-top"
-      style={{ backgroundColor: "#fff" }}
-    >
-      <div className="container p-2">
-
-        <Link className="navbar-brand" to="/">
-          <img
-            src="media/images/logo.svg"
-            alt="logo"
-            style={{ width: "25%" }}
-          />
+    <header className="site-header">
+      <nav className="site-nav">
+        <Link to="/" className="brand-lockup" onClick={() => setOpen(false)}>
+          <span className="brand-mark">N</span>
+          <span className="northstar-text">
+            northstar<span className="brand-dot">.</span>
+          </span>
         </Link>
-
         <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
+          className="mobile-menu-toggle"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle navigation"
+          aria-expanded={open}
         >
-          <span className="navbar-toggler-icon"></span>
+          <i className={open ? "bi bi-x-lg" : "bi bi-list"} />
         </button>
-
-        <div
-          className="collapse navbar-collapse"
-          id="navbarSupportedContent"
-        >
-          <ul className="navbar-nav ms-auto">
-
-            {/* Login */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
-
-            {/* Signup */}
-            <li className="nav-item">
-              <Link className="btn btn-primary ms-2" to="/signup">
-                Signup
-              </Link>
-            </li>
-
-            {/* About */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">
-                About
-              </Link>
-            </li>
-
-            {/* Product */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/products">
-                Product
-              </Link>
-            </li>
-
-            {/* Pricing */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/pricing">
-                Pricing
-              </Link>
-            </li>
-
-            {/* Support */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/supports">
-                Support
-              </Link>
-            </li>
-
-          </ul>
+        <div className={`nav-links ${open ? "nav-open" : ""}`}>
+          {links.map(([label, path]) => (
+            <Link
+              key={path}
+              to={path}
+              className={
+                location.pathname === path ? "nav-link active" : "nav-link"
+              }
+              onClick={() => setOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+          <Link
+            to="/login"
+            className="nav-login"
+            onClick={() => setOpen(false)}
+          >
+            Log in
+          </Link>
+          <Link to="/signup" className="nav-cta" onClick={() => setOpen(false)}>
+            Get started <span>↗</span>
+          </Link>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
-
 export default Navbar;

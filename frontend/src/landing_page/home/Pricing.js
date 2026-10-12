@@ -1,30 +1,3 @@
-import React from 'react';
-
-function Pricing() {
-    return ( 
-        <div className='container'>
-            <div className='row'>
-                <div className='col-4'>
-                    <h1 className='mb-3 fs-2'>Unbeatable Pricing</h1>
-                    <p>We pioneered the concept of discount broking and price transparency in India. Flat feee and no hidden charges.</p>
-                    <a href='' style={{ textDecoration: 'none' }}>See Pricing <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                </div>
-                <div className='col-2'></div>
-                <div className='col-6 mt-2'>
-                    <div className='row text-center'>
-                        <div className='col p-3 border'>
-                            <h1 className='mb-3'>₹0</h1>
-                            <p>Free equity delivery and<br/> direct mutual funds</p>
-                        </div>
-                        <div className='col p-3 border'>
-                            <h1 className='mb-3'>₹20</h1>
-                            <p>Intraday and F&O</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-     );
-}
-
+import React from 'react';import {Link} from 'react-router-dom';
+function Pricing(){return <section className="pricing-band"><div><span className="section-kicker">SIMPLE BY DESIGN</span><h2>Transparent pricing.<br/><em>No surprises.</em></h2><p>Know what you are signing up for before you get started. Explore the platform and its available features.</p><Link className="inline-link" to="/pricing">View pricing details <span>↗</span></Link></div><div className="pricing-cards"><article><span className="pricing-card-label">START EXPLORING</span><h3>₹0 <small>/ to begin</small></h3><p>Explore the demo experience and learn your way around the platform.</p><span className="pricing-card-foot"><i className="bi bi-check-circle-fill"/> No commitment to explore</span></article><article className="pricing-card-accent"><span className="pricing-card-label">YOUR NEXT STEP</span><h3>Made for <small>your goals</small></h3><p>Review the available features and choose the workflow that suits you.</p><Link to="/signup">Create an account ↗</Link></article></div></section>}
 export default Pricing;
