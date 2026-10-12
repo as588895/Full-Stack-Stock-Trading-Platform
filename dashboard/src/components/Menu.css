@@ -660,3 +660,17 @@
   }
 
 }
+
+/* ===== NORTHSTAR 2.0 — MATCHES MAIN FRONTEND DESIGN SYSTEM ===== */
+
+.menu-container { background: rgba(255,255,255,.96) !important; backdrop-filter: blur(18px); border-bottom: 1px solid #e7ece5 !important; box-shadow: 0 5px 24px #17241c08 !important; }
+.menu { color: #748078 !important; }
+.menu:hover, .menu.selected { color: #17241c !important; }
+.menu.selected::after { background: #8fbe5d !important; box-shadow: 0 0 8px #8fbe5d40; }
+.profile .avatar { background: #c2f477 !important; color: #17241c !important; box-shadow: 0 0 0 3px #c2f4772b; }
+.profile .username { color: #26382a !important; }
+.profile-dropdown { background: #fff !important; border: 1px solid #e5ece1 !important; box-shadow: 0 18px 45px #17241c18 !important; }
+.profile-id { color: #748078 !important; border-bottom-color: #e7ece5 !important; }
+.profile-id strong { color: #17241c !important; }
+.logout-btn { color: #a34843 !important; }
+

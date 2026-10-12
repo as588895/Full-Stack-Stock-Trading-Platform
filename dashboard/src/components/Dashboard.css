@@ -93,3 +93,11 @@
   }
 
 }
+
+
+/* ===== NORTHSTAR 2.0 — MATCHES MAIN FRONTEND DESIGN SYSTEM ===== */
+
+.dashboard-container { background: #f8faf6 !important; color: #17241c; }
+.dashboard-container .content { background: #f8faf6; }
+@media (max-width: 900px) { .dashboard-container { padding-top: 64px; } }
+

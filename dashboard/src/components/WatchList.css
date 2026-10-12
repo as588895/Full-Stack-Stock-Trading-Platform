@@ -913,3 +913,20 @@
   }
 
 }
+
+/* ===== NORTHSTAR 2.0 — MATCHES MAIN FRONTEND DESIGN SYSTEM ===== */
+
+.watchlist-container { background: #fff !important; color: #17241c !important; border-right: 1px solid #e5ece1 !important; box-shadow: 8px 0 30px #17241c06 !important; }
+.watchlist-container .search, .watchlist-container input { background: #f8faf6 !important; color: #17241c !important; border-color: #e5ece1 !important; border-radius: 10px !important; }
+.watchlist-container .search:focus, .watchlist-container input:focus { outline: 2px solid #c2f477 !important; border-color: #a7d77a !important; }
+.watchlist-container .item > p { color: #26382b !important; }
+.watchlist-container .price { color: #17241c !important; }
+.watchlist-container .percent { color: #758276 !important; }
+.watchlist-container .list > li { border-color: #edf1e9 !important; }
+.watchlist-container .list > li:hover { background: #f5f9f0 !important; }
+.watchlist-container .actions { background: linear-gradient(90deg, #ffffff10, #ffffffef 35%, #fff 65%) !important; }
+.watchlist-container .actions .action { color: #5f6d60 !important; background: #f5f8f2 !important; border-color: #e3ebdc !important; }
+.watchlist-container .actions .action:hover { color: #17241c !important; background: #eaf4df !important; }
+.watchlist-container::-webkit-scrollbar-track { background: #f8faf6 !important; }
+.watchlist-container::-webkit-scrollbar-thumb { background: #dce6d5 !important; }
+

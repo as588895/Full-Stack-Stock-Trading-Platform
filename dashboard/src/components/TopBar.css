@@ -305,3 +305,12 @@
   }
 
 }
+
+/* ===== NORTHSTAR 2.0 — MATCHES MAIN FRONTEND DESIGN SYSTEM ===== */
+
+.topbar-container { background: rgba(255,255,255,.94) !important; backdrop-filter: blur(18px); border-bottom: 1px solid #e7ece5 !important; box-shadow: 0 5px 24px #17241c08 !important; }
+.nifty, .sensex { background: #f8faf6 !important; border: 1px solid #e7ece5 !important; }
+.index { color: #748078 !important; }
+.index-points { color: #17241c !important; }
+.indices-container .percent { color: #4f8237 !important; }
+
